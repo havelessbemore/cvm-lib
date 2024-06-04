@@ -1,6 +1,6 @@
 # Security Policy
 
-We strive to keep Munkres secure for everyone. We welcome your help in disclosing vulnerabilities responsibly.
+We strive to keep CVM secure for everyone. We welcome your help in disclosing vulnerabilities responsibly.
 
 ## Supported Versions
 

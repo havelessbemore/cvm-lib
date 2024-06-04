@@ -10,21 +10,21 @@ export interface CVMConfig {
    *
    * Should be a positive integer.
    *
-   * This can be calculated with {@link calculateCapacity} but
+   * Can be calculated with {@link calculateCapacity} but
    * can also be set arbitrarily. In general, the larger
-   * the capacity, the more accurate the estimate of distinct values.
+   * the capacity, the more accurate the estimate.
    */
   capacity: number;
-
-  /**
-   * (Optional) The probability used for collecting / discarding samples. Should be between 0 and 1.
-   *
-   * @remarks Should NOT be used unless you know what you're doing. Misuse can cause inaccurate / invalid results, increased runtime or infinite loops.
-   */
-  probability?: number;
 
   /**
    * (Optional) The random number generator function. Defaults to `Math.random`.
    */
   randomFn?: () => number;
+
+  /**
+   * (Optional) The probability used for collecting and discarding samples. Should be between 0 and 1.
+   *
+   * @remarks Should NOT be used unless you know what you're doing. Misuse can cause invalid results and/or increased runtime.
+   */
+  sampleRate?: number;
 }

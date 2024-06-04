@@ -1,5 +1,5 @@
 import { CVMConfig } from "./cvmConfig";
-import { tryFraction, tryPositive } from "./try";
+import { isFraction, isPositiveInt } from "./is";
 
 /**
  * Estimates the number of distinct elements within an input set
@@ -15,9 +15,9 @@ export class CVM<T> {
   protected _capacity: number;
 
   /**
-   * The base probability used for managing samples.
+   * The current sample rate.
    */
-  protected _probability: number;
+  protected _curRate: number;
 
   /**
    * The random number generator function.
@@ -25,7 +25,7 @@ export class CVM<T> {
   protected _randomFn: () => number;
 
   /**
-   * The current sample rate.
+   * The given sample rate (e.g. `0.5`).
    */
   protected _sampleRate: number;
 
@@ -37,42 +37,50 @@ export class CVM<T> {
   /**
    * Creates an instance of the CVM algorithm.
    *
-   * @param config - Configuration options for the CVM.
+   * @param capacity - The maximum number of samples in memory.
    */
-  constructor({ capacity, probability, randomFn }: CVMConfig) {
-    // Sanitize inputs
-    tryPositive(capacity);
-    probability ??= 0.5;
-    tryFraction(probability);
-    randomFn ??= Math.random;
-
-    // Initialize instance
-    this._capacity = capacity;
-    this._probability = probability;
-    this._randomFn = randomFn;
-    this._sampleRate = 1;
+  constructor(capacity: number);
+  /**
+   * Creates an instance of the CVM algorithm.
+   *
+   * @param config - Configuration options.
+   */
+  constructor(config: CVMConfig);
+  constructor(config: number | CVMConfig) {
+    // Initialize with defaults
+    this._capacity = 1;
+    this._curRate = 1;
+    this._randomFn = Math.random;
+    this._sampleRate = 0.5;
     this._samples = new Set();
+
+    // Apply capacity
+    if (typeof config === "number") {
+      this.capacity = config;
+      return;
+    }
+
+    // Apply config object
+    this.capacity = config.capacity;
+    config.sampleRate != null && (this.sampleRate = config.sampleRate);
+    config.randomFn != null && (this.randomFn = config.randomFn);
   }
 
   /**
-   * Gets the threshold of the CVM.
+   * Gets the capacity.
    */
   get capacity(): number {
     return this._capacity;
   }
 
   /**
-   * Gets the estimated number of distinct elements.
+   * Sets the capacity.
    */
-  get estimate(): number {
-    return this._samples.size / this._sampleRate;
-  }
-
-  /**
-   * Gets the probability used for managing samples.
-   */
-  get probability(): number {
-    return this._probability;
+  protected set capacity(capacity: number) {
+    if (!isPositiveInt(capacity)) {
+      throw new RangeError(`Invalid capacity`);
+    }
+    this._capacity = capacity;
   }
 
   /**
@@ -80,6 +88,30 @@ export class CVM<T> {
    */
   get randomFn(): () => number {
     return this._randomFn;
+  }
+
+  /**
+   * Sets the random number generator function.
+   */
+  set randomFn(randomFn: () => number) {
+    this._randomFn = randomFn;
+  }
+
+  /**
+   * Gets the sample rate
+   */
+  get sampleRate(): number {
+    return this._sampleRate;
+  }
+
+  /**
+   * Sets the sample rate.
+   */
+  protected set sampleRate(sampleRate: number) {
+    if (!isFraction(sampleRate)) {
+      throw new RangeError(`Invalid sample rate`);
+    }
+    this._sampleRate = sampleRate;
   }
 
   /**
@@ -97,8 +129,9 @@ export class CVM<T> {
    * @returns The CVM instance.
    */
   add(value: T): this {
+
     // Remove value if not sampled
-    if (this._randomFn() >= this._sampleRate) {
+    if (this._randomFn() >= this._curRate) {
       this._samples.delete(value);
       return this;
     }
@@ -106,16 +139,19 @@ export class CVM<T> {
     // Add value to samples
     this._samples.add(value);
 
-    // If not at capacity
-    if (this._samples.size < this._capacity) {
-      return this;
+    // While at capacity
+    while (this._samples.size >= this._capacity) {
+
+      // Reduce sample size to within capacity
+      for (const value of this._samples) {
+        if (this._randomFn() >= this._sampleRate) {
+          this._samples.delete(value);
+        }
+      }
+
+      // Update sample rate
+      this._curRate *= this._sampleRate;
     }
-
-    // Update sample rate
-    this._sampleRate *= this._probability;
-
-    // Reduce sample size to below capacity.
-    this._cull();
 
     return this;
   }
@@ -124,42 +160,14 @@ export class CVM<T> {
    * Clears / resets the CVM.
    */
   clear(): void {
-    this._sampleRate = 1;
+    this._curRate = 1;
     this._samples.clear();
   }
 
   /**
-   * Checks if a value is currently being sampled.
-   *
-   * @param value - The value to check for.
-   *
-   * @returns `true` if the value is sampled, `false` otherwise.
+   * Gets the estimated number of distinct elements.
    */
-  has(value: T): boolean {
-    return this._samples.has(value);
-  }
-
-  /**
-   * @returns An iterator over the currently sampled values.
-   */
-  values(): IterableIterator<T> {
-    return this._samples.values();
-  }
-
-  /**
-   * @returns An iterator over the currently sampled values.
-   */
-  [Symbol.iterator](): IterableIterator<T> {
-    return this._samples.values();
-  }
-
-  protected _cull(): void {
-    do {
-      for (const value of this._samples) {
-        if (this._randomFn() >= this._probability) {
-          this._samples.delete(value);
-        }
-      }
-    } while (this._samples.size >= this._capacity);
+  estimate(): number {
+    return this._samples.size / this._curRate;
   }
 }
