@@ -7,19 +7,19 @@ import { isFraction, isPositive } from "./is";
  * @param n - The total number of values in the set, or an estimate if unknown.
  *
  * - Should be a positive value.
- * - If unknown, an overestimate will generally give better results but with more space.
+ * - If unknown, an overestimate is better, but results in more space.
  *
- * @param epsilon - The relative error of an estimate. Controls accuracy.
+ * @param epsilon - The relative error. Controls accuracy.
  *
  * - Should be between 0 and 1.
  * - Smaller values equal more accuracy but more space.
- * - Defaults to `0.05` (i.e. 95% accuracy; estimates are within a ±5% range of the true value).
+ * - Defaults to `0.05` (i.e. 95% accuracy; estimates can range within ±5% of the true value).
  *
- * @param delta - The probability an estimate is outside the accuracy range. Controls confidence.
+ * @param delta - The probability an estimate is not within expected accuracy. Controls confidence.
  *
  * - Should be between 0 and 1.
  * - Smaller values equal higher confidence but more space.
- * - Defaults to `0.01` (i.e. 99% confidence; there is a 1% probability an estimate is outside the accuracy range).
+ * - Defaults to `0.01` (i.e. 99% confidence; there is a 1% chance an estimate is outside the expected accuracy range).
  *
  * @returns The calculated capacity.
  */

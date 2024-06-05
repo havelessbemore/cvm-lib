@@ -2,7 +2,7 @@ import { CVMConfig } from "./cvmConfig";
 import { isFraction, isPositiveInt } from "./is";
 
 /**
- * Estimates the number of distinct elements within an input set
+ * Estimates the number of distinct values within a set
  * using a simple and space-efficient sampling strategy.
  *
  * @see {@link https://www.quantamagazine.org/computer-scientists-invent-an-efficient-new-way-to-count-20240516/ | Nadis, S. (2024, May 16). Computer Scientists Invent an Efficient New Way to Count. Quanta Magazine.} for a summary and example.
@@ -15,17 +15,17 @@ export class CVM<T> {
   protected _capacity: number;
 
   /**
-   * The current sample rate.
-   */
-  protected _curRate: number;
-
-  /**
    * The random number generator function.
    */
   protected _randomFn: () => number;
 
   /**
-   * The given sample rate (e.g. `0.5`).
+   * The current sample rate.
+   */
+  protected _rate: number;
+
+  /**
+   * The given sample rate.
    */
   protected _sampleRate: number;
 
@@ -49,7 +49,7 @@ export class CVM<T> {
   constructor(config: number | CVMConfig) {
     // Initialize with defaults
     this._capacity = 1;
-    this._curRate = 1;
+    this._rate = 1;
     this._randomFn = Math.random;
     this._sampleRate = 0.5;
     this._samples = new Set();
@@ -67,14 +67,14 @@ export class CVM<T> {
   }
 
   /**
-   * Gets the capacity.
+   * Gets capacity.
    */
   get capacity(): number {
     return this._capacity;
   }
 
   /**
-   * Sets the capacity.
+   * Sets capacity. Should be a positive integer.
    */
   protected set capacity(capacity: number) {
     if (!isPositiveInt(capacity)) {
@@ -91,21 +91,21 @@ export class CVM<T> {
   }
 
   /**
-   * Sets the random number generator function.
+   * Sets the random number generator function, which should return values between 0 and 1.
    */
   set randomFn(randomFn: () => number) {
     this._randomFn = randomFn;
   }
 
   /**
-   * Gets the sample rate
+   * Gets the sample rate.
    */
   get sampleRate(): number {
     return this._sampleRate;
   }
 
   /**
-   * Sets the sample rate.
+   * Sets the sample rate. Should be between 0 and 1.
    */
   protected set sampleRate(sampleRate: number) {
     if (!isFraction(sampleRate)) {
@@ -130,27 +130,27 @@ export class CVM<T> {
    */
   add(value: T): this {
 
-    // Remove value if not sampled
-    if (this._randomFn() >= this._curRate) {
+    // Ignore / remove value if not sampled
+    if (this._randomFn() >= this._rate) {
       this._samples.delete(value);
       return this;
     }
 
-    // Add value to samples
+    // Add sample
     this._samples.add(value);
 
     // While at capacity
     while (this._samples.size >= this._capacity) {
 
-      // Reduce sample size to within capacity
+      // Reduce samples to within capacity
       for (const value of this._samples) {
         if (this._randomFn() >= this._sampleRate) {
           this._samples.delete(value);
         }
       }
 
-      // Update sample rate
-      this._curRate *= this._sampleRate;
+      // Update current sampling rate
+      this._rate *= this._sampleRate;
     }
 
     return this;
@@ -160,14 +160,14 @@ export class CVM<T> {
    * Clears / resets the CVM.
    */
   clear(): void {
-    this._curRate = 1;
+    this._rate = 1;
     this._samples.clear();
   }
 
   /**
-   * Gets the estimated number of distinct elements.
+   * Gets the estimated number of distinct values.
    */
   estimate(): number {
-    return this._samples.size / this._curRate;
+    return this._samples.size / this._rate;
   }
 }

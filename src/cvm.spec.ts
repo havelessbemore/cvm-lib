@@ -247,7 +247,7 @@ describe(`${CVM.name}`, () => {
       }
   
       expect(cvm.size).toBeLessThan(3);
-      expect((cvm as any)._curRate).toBeLessThan(1);
+      expect((cvm as any)._rate).toBeLessThan(1);
     });
   
     test('should handle duplicate values correctly', () => {
@@ -284,9 +284,9 @@ describe(`${CVM.name}`, () => {
       for (let i = 0; i < 4; ++i) {
         cvm.add(i);
       }
-      expect((cvm as any)._curRate).toBeLessThan(1);
+      expect((cvm as any)._rate).toBeLessThan(1);
       cvm.clear();
-      expect((cvm as any)._curRate).toBe(1);
+      expect((cvm as any)._rate).toBe(1);
     });
 
     test("should clear all samples", () => {
@@ -306,7 +306,7 @@ describe(`${CVM.name}`, () => {
       expect(cvm.size).toBeLessThan(cvm.capacity);
       cvm.clear();
       expect(cvm.size).toBe(0);
-      expect((cvm as any)._curRate).toBe(1);
+      expect((cvm as any)._rate).toBe(1);
     });
 
     test("should maintain correct state after clear and re-add", () => {
@@ -322,7 +322,7 @@ describe(`${CVM.name}`, () => {
       const cvm = new CVM<number>(10);
       cvm.clear();
       expect(cvm.size).toBe(0);
-      expect((cvm as any)._curRate).toBe(1);
+      expect((cvm as any)._rate).toBe(1);
     });
   });
 

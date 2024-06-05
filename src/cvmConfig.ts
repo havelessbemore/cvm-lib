@@ -17,14 +17,14 @@ export interface CVMConfig {
   capacity: number;
 
   /**
-   * (Optional) The random number generator function. Defaults to `Math.random`.
+   * (Optional) The random number generator function. Should return values between 0 and 1.
    */
   randomFn?: () => number;
 
   /**
-   * (Optional) The probability used for collecting and discarding samples. Should be between 0 and 1.
-   *
-   * @remarks Should NOT be used unless you know what you're doing. Misuse can cause invalid results and/or increased runtime.
+   * (Optional) The sampling rate for managing samples. Should be between 0 and 1.
+   * 
+   * @remarks Use with caution. Behavior for values other than `0.5` is undefined and may cause invalid estimates and/or increased runtime.
    */
   sampleRate?: number;
 }
