@@ -13,8 +13,8 @@ interface EstimatorConfig {
     /**
      * (Optional) The random number generator function.
      *
-     * Should return random or pseudorandom values in [0, 1). Otherwise, behavior is undefined,
-     * and may cause invalid estimates, infinite loops and/or crashes.
+     * Should return random or pseudorandom values between 0 and 1.
+     * Otherwise, this may cause unintended behavior such as invalid estimates.
      */
     randomFn?: () => number;
     /**
@@ -165,8 +165,8 @@ declare class Estimator<T> {
     /**
      * Sets the random number generator function.
      *
-     * The function should return random or pseudorandom values in [0, 1). Otherwise,
-     * behavior is undefined, and may cause invalid estimates, infinite loops and/or crashes.
+     * The function should return random or pseudorandom values between 0 and 1.
+     * Otherwise, this may cause unintended behavior such as invalid estimates.
      */
     set randomFn(randomFn: () => number);
     /**

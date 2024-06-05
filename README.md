@@ -120,8 +120,12 @@ Estimates the number of distinct values in a set.
 A configuration object used to create `Estimator` instances.
 
 - `capacity`: The maximum number of samples in memory. Must be a positive integer.
-- `randomFn` (optional): The random number generator function. Should return values in [0, 1).
+- `randomFn` (optional): The random number generator function.
+  - The function should return random or pseudorandom values between 0 and 1.
+    Otherwise, this may cause unintended behavior such as invalid estimates.
 - `sampleRate` (optional): The sampling rate for managing samples. Must be between 0 and 1.
+  - **Note:** Behavior is undefined for values other than `0.5`. Use with caution as it may
+    cause invalid estimates.
 
 ## References
 

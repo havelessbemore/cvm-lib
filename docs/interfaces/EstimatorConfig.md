@@ -22,7 +22,7 @@ values give more accurate estimates.
 
 #### Source
 
-[estimatorConfig.ts:17](https://github.com/havelessbemore/cvm-lib/blob/04b68a799078dd23b2fa0a4287fc69529ca49da0/src/estimatorConfig.ts#L17)
+[estimatorConfig.ts:17](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimatorConfig.ts#L17)
 
 ***
 
@@ -32,8 +32,8 @@ values give more accurate estimates.
 
 (Optional) The random number generator function.
 
-Should return random or pseudorandom values in [0, 1). Otherwise, behavior is undefined,
-and may cause invalid estimates, infinite loops and/or crashes.
+Should return random or pseudorandom values between 0 and 1.
+Otherwise, this may cause unintended behavior such as invalid estimates.
 
 #### Returns
 
@@ -41,7 +41,7 @@ and may cause invalid estimates, infinite loops and/or crashes.
 
 #### Source
 
-[estimatorConfig.ts:25](https://github.com/havelessbemore/cvm-lib/blob/04b68a799078dd23b2fa0a4287fc69529ca49da0/src/estimatorConfig.ts#L25)
+[estimatorConfig.ts:25](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimatorConfig.ts#L25)
 
 ***
 
@@ -58,4 +58,4 @@ Behavior is undefined for values other than `0.5` and may lead to invalid estima
 
 #### Source
 
-[estimatorConfig.ts:35](https://github.com/havelessbemore/cvm-lib/blob/04b68a799078dd23b2fa0a4287fc69529ca49da0/src/estimatorConfig.ts#L35)
+[estimatorConfig.ts:35](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimatorConfig.ts#L35)
