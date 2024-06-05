@@ -99,6 +99,9 @@ Estimates the number of distinct values in a set.
 - Constructors
 
   - `new (capacity)`: Create an instance with a given capacity. Must be a positive integer.
+    - Defaults:
+      - `randomFn`: `Math.random`.
+      - `sampleRate`: `0.5`.
   - `new (config)`: Create an instance using a config object.
 
 - Properties
