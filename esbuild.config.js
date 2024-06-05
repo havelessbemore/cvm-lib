@@ -15,11 +15,11 @@ const options = {
 await esbuild.build({
   ...options,
   format: "esm",
-  outfile: pkg.module,
+  outfile: pkg.publishConfig.module,
 });
 
 await esbuild.build({
   ...options,
   format: "cjs",
-  outfile: pkg.module,
+  outfile: pkg.publishConfig.main,
 });

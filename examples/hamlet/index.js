@@ -3,7 +3,7 @@ import path from "node:path";
 import readline from "node:readline";
 import url from "node:url";
 
-import { calculateCapacity, CVM } from "../../src";
+import { calculateCapacity, CVM } from "../../dist/index.mjs";
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,16 +17,16 @@ const INPUT_PATH = path.join(__dirname, "input.txt");
 const CVM_ACCURACY = 0.9; // 90% accuracy
 const CVM_CONFIDENCE = 0.99; // 99% confidence
 
-async function main(filePath: string, capacity: number): Promise<void> {
+async function main(filePath, capacity) {
   // Create the input stream
-  const fileStream = fs.createReadStream(filePath, { encoding: "utf-8" });
+  const readStream = fs.createReadStream(filePath, { encoding: "utf-8" });
   const rl = readline.createInterface({
-    input: fileStream,
+    input: readStream,
     crlfDelay: Infinity,
   });
 
   // Create the CVM instance
-  const cvm = new CVM<string>({ capacity });
+  const cvm = new CVM({ capacity });
 
   // Process each word
   const wordRegex = /\b\w+\b/g;
