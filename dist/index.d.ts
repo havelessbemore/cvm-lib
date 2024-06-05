@@ -1,25 +1,29 @@
 /**
- * Configuration options for the CVM algorithm.
+ * Configuration options for {@link CVM}.
  */
 interface CVMConfig {
     /**
-     * The maximum number of sample values to have in memory.
+     * The maximum number of samples in memory. Must be a positive integer.
      *
-     * Should be a positive integer.
-     *
-     * Can be calculated with {@link calculateCapacity} but
-     * can also be set arbitrarily. In general, the larger
-     * the capacity, the more accurate the estimate.
+     * This should be calculated via {@link calculateCapacity} but
+     * can also be set arbitrarily. In general, larger
+     * values give more accurate estimates.
      */
     capacity: number;
     /**
-     * (Optional) The random number generator function. Should return values between 0 and 1.
+     * (Optional) The random number generator function.
+     *
+     * Should return random or pseudorandom values between 0 and 1. Otherwise, behavior is undefined,
+     * and may cause invalid estimates, infinite loops and/or crashes.
      */
     randomFn?: () => number;
     /**
-     * (Optional) The sampling rate for managing samples. Should be between 0 and 1.
+     * (Optional) The sampling rate for managing samples.
      *
-     * @remarks Use with caution. Behavior for values other than `0.5` is undefined and may cause invalid estimates and/or increased runtime.
+     * Must be between 0 and 1.
+     *
+     * **NOTE**: This is an advanced property and should be used with caution.
+     * Behavior is undefined for values other than `0.5` and may lead to invalid estimates.
      */
     sampleRate?: number;
 }
@@ -30,22 +34,63 @@ interface CVMConfig {
  *
  * @param n - The total number of values in the set, or an estimate if unknown.
  *
- * - Should be a positive value.
+ * - Must be a positive number.
  * - If unknown, an overestimate is better, but results in more space.
  *
- * @param epsilon - The relative error. Controls accuracy.
+ * @param epsilon - An estimate's relative error. Controls accuracy.
  *
- * - Should be between 0 and 1.
+ * - Must be between 0 and 1.
  * - Smaller values equal more accuracy but more space.
  * - Defaults to `0.05` (i.e. 95% accuracy; estimates can range within ±5% of the true value).
  *
- * @param delta - The probability an estimate is not within expected accuracy. Controls confidence.
+ * @param delta - The probability an estimate is not accurate. Controls confidence.
  *
- * - Should be between 0 and 1.
+ * - Must be between 0 and 1.
  * - Smaller values equal higher confidence but more space.
- * - Defaults to `0.01` (i.e. 99% confidence; there is a 1% chance an estimate is outside the expected accuracy range).
+ * - Defaults to `0.01` (i.e. 99% confidence; there is a 1% chance an estimate is less accurate than expected by `epsilon`).
  *
  * @returns The calculated capacity.
+ *
+ * @throws A {@link RangeError} for any of the following:
+ * - `n` is not a positive number.
+ * - `epsilon` is not between 0 and 1.
+ * - `delta` is not between 0 and 1.
+ *
+ * @example
+ * ```javascript
+ *  // Get the capacity for estimating the number
+ *  // of distinct values in a set of 1 billion.
+ *  // Estimates will have a 99% probability of
+ *  // being within ±5% of the actual number.
+ *  const capacity = calculateCapacity(1e9); // 14,617
+ * ```
+ *
+ * @example
+ * ```javascript
+ *  // Get the capacity for estimating the number
+ *  // of distinct values in a set of 1 billion.
+ *  // Estimates will have a 99% probability of
+ *  // being within ±10% of the actual number.
+ *  const capacity = calculateCapacity(1e9, 0.1); // 3,655
+ * ```
+ *
+ * @example
+ * ```javascript
+ *  // Get the capacity for estimating the number
+ *  // of distinct values in a set of 1 billion.
+ *  // Estimates will have a 80% probability of
+ *  // being within ±5% of the actual number.
+ *  const capacity = calculateCapacity(1e9, 0.05, 0.2); // 12,888
+ * ```
+ *
+ * @example
+ * ```javascript
+ *  // Get the capacity for estimating the number
+ *  // of distinct values in a set of 1 billion.
+ *  // Estimates will have a 99.999% probability of
+ *  // being within ±1% of the actual number.
+ *  const capacity = calculateCapacity(1e9, 0.01, 0.00001); // 465,070
+ * ```
  */
 declare function calculateCapacity(n: number, epsilon?: number, delta?: number): number;
 
@@ -53,7 +98,7 @@ declare function calculateCapacity(n: number, epsilon?: number, delta?: number):
  * Estimates the number of distinct values within a set
  * using a simple and space-efficient sampling strategy.
  *
- * @see {@link https://www.quantamagazine.org/computer-scientists-invent-an-efficient-new-way-to-count-20240516/ | Nadis, S. (2024, May 16). Computer Scientists Invent an Efficient New Way to Count. Quanta Magazine.} for a summary and example.
+ * @see {@link https://www.quantamagazine.org/computer-scientists-invent-an-efficient-new-way-to-count-20240516/ | Nadis, S. (2024, May 16). Computer Scientists Invent an Efficient New Way to Count. Quanta Magazine.} for a high-level explanation.
  * @see {@link https://arxiv.org/pdf/2301.10191v2 | Chakraborty, S., Vinodchandran, N. V., & Meel, K. S. (2023). Distinct Elements in Streams: An Algorithm for the (Text) Book} for the source paper.
  */
 declare class CVM<T> {
@@ -63,14 +108,20 @@ declare class CVM<T> {
     protected _capacity: number;
     /**
      * The random number generator function.
+     *
+     * @defaultValue `Math.random`
      */
     protected _randomFn: () => number;
     /**
      * The current sample rate.
+     *
+     * @defaultValue Initializes to `1`.
      */
     protected _rate: number;
     /**
      * The given sample rate.
+     *
+     * @defaultValue `0.5`
      */
     protected _sampleRate: number;
     /**
@@ -80,13 +131,21 @@ declare class CVM<T> {
     /**
      * Creates an instance of the CVM algorithm.
      *
-     * @param capacity - The maximum number of samples in memory.
+     * @param capacity - The maximum number of samples in memory. Must be a positive integer.
+     *
+     * @throws A {@link RangeError} if `capacity` is not a positive integer.
      */
     constructor(capacity: number);
     /**
      * Creates an instance of the CVM algorithm.
      *
      * @param config - Configuration options.
+     *
+     * @defaultValue
+     * - {@link CVMConfig.randomFn} defaults to `Math.random`.
+     * - {@link CVMConfig.sampleRate} defaults to `0.5`.
+     *
+     * @throws A {@link RangeError} if a given configuration value is not within their expected range.
      */
     constructor(config: CVMConfig);
     /**
@@ -94,7 +153,9 @@ declare class CVM<T> {
      */
     get capacity(): number;
     /**
-     * Sets capacity. Should be a positive integer.
+     * Sets capacity. Must be a positive integer.
+     *
+     * @throws A {@link RangeError} if not given a positive integer.
      */
     protected set capacity(capacity: number);
     /**
@@ -102,7 +163,10 @@ declare class CVM<T> {
      */
     get randomFn(): () => number;
     /**
-     * Sets the random number generator function, which should return values between 0 and 1.
+     * Sets the random number generator function.
+     *
+     * The function should return random or pseudorandom values between 0 and 1. Otherwise,
+     * behavior is undefined, and may cause invalid estimates, infinite loops and/or crashes.
      */
     set randomFn(randomFn: () => number);
     /**
@@ -110,17 +174,27 @@ declare class CVM<T> {
      */
     get sampleRate(): number;
     /**
-     * Sets the sample rate. Should be between 0 and 1.
+     * Sets the sample rate. Must be between 0 and 1.
+     *
+     * @throws A {@link RangeError} if not given a number between 0 and 1.
      */
     protected set sampleRate(sampleRate: number);
     /**
-     * Gets the current number of samples in memory.
+     * Gets the number of samples in memory.
      */
     get size(): number;
     /**
-     * Adds a value to the CVM.
+     * Add a value to the CVM.
      *
-     * @param value - The value to be added.
+     * Given values may be randomly selected for sampling. If selected,
+     * the value is stored internally. Otherwise, they are ignored, or
+     * discarded if previously selected.
+     *
+     * If capacity is reached, samples are resampled,
+     * and only values that are again selected are kept.
+     * This process repeats until free space is made.
+     *
+     * @param value - The value to add.
      *
      * @returns The CVM instance.
      */

@@ -59,14 +59,20 @@ class CVM {
     __publicField(this, "_capacity");
     /**
      * The random number generator function.
+     *
+     * @defaultValue `Math.random`
      */
     __publicField(this, "_randomFn");
     /**
      * The current sample rate.
+     *
+     * @defaultValue Initializes to `1`.
      */
     __publicField(this, "_rate");
     /**
      * The given sample rate.
+     *
+     * @defaultValue `0.5`
      */
     __publicField(this, "_sampleRate");
     /**
@@ -93,7 +99,9 @@ class CVM {
     return this._capacity;
   }
   /**
-   * Sets capacity. Should be a positive integer.
+   * Sets capacity. Must be a positive integer.
+   *
+   * @throws A {@link RangeError} if not given a positive integer.
    */
   set capacity(capacity) {
     if (!isPositiveInt(capacity)) {
@@ -108,7 +116,10 @@ class CVM {
     return this._randomFn;
   }
   /**
-   * Sets the random number generator function, which should return values between 0 and 1.
+   * Sets the random number generator function.
+   *
+   * The function should return random or pseudorandom values between 0 and 1. Otherwise,
+   * behavior is undefined, and may cause invalid estimates, infinite loops and/or crashes.
    */
   set randomFn(randomFn) {
     this._randomFn = randomFn;
@@ -120,7 +131,9 @@ class CVM {
     return this._sampleRate;
   }
   /**
-   * Sets the sample rate. Should be between 0 and 1.
+   * Sets the sample rate. Must be between 0 and 1.
+   *
+   * @throws A {@link RangeError} if not given a number between 0 and 1.
    */
   set sampleRate(sampleRate) {
     if (!isFraction(sampleRate)) {
@@ -129,15 +142,23 @@ class CVM {
     this._sampleRate = sampleRate;
   }
   /**
-   * Gets the current number of samples in memory.
+   * Gets the number of samples in memory.
    */
   get size() {
     return this._samples.size;
   }
   /**
-   * Adds a value to the CVM.
+   * Add a value to the CVM.
    *
-   * @param value - The value to be added.
+   * Given values may be randomly selected for sampling. If selected,
+   * the value is stored internally. Otherwise, they are ignored, or
+   * discarded if previously selected.
+   *
+   * If capacity is reached, samples are resampled,
+   * and only values that are again selected are kept.
+   * This process repeats until free space is made.
+   *
+   * @param value - The value to add.
    *
    * @returns The CVM instance.
    */

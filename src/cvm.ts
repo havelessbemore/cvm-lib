@@ -5,7 +5,7 @@ import { isFraction, isPositiveInt } from "./is";
  * Estimates the number of distinct values within a set
  * using a simple and space-efficient sampling strategy.
  *
- * @see {@link https://www.quantamagazine.org/computer-scientists-invent-an-efficient-new-way-to-count-20240516/ | Nadis, S. (2024, May 16). Computer Scientists Invent an Efficient New Way to Count. Quanta Magazine.} for a summary and example.
+ * @see {@link https://www.quantamagazine.org/computer-scientists-invent-an-efficient-new-way-to-count-20240516/ | Nadis, S. (2024, May 16). Computer Scientists Invent an Efficient New Way to Count. Quanta Magazine.} for a high-level explanation.
  * @see {@link https://arxiv.org/pdf/2301.10191v2 | Chakraborty, S., Vinodchandran, N. V., & Meel, K. S. (2023). Distinct Elements in Streams: An Algorithm for the (Text) Book} for the source paper.
  */
 export class CVM<T> {
@@ -16,16 +16,22 @@ export class CVM<T> {
 
   /**
    * The random number generator function.
+   *
+   * @defaultValue `Math.random`
    */
   protected _randomFn: () => number;
 
   /**
    * The current sample rate.
+   *
+   * @defaultValue Initializes to `1`.
    */
   protected _rate: number;
 
   /**
    * The given sample rate.
+   *
+   * @defaultValue `0.5`
    */
   protected _sampleRate: number;
 
@@ -37,13 +43,21 @@ export class CVM<T> {
   /**
    * Creates an instance of the CVM algorithm.
    *
-   * @param capacity - The maximum number of samples in memory.
+   * @param capacity - The maximum number of samples in memory. Must be a positive integer.
+   *
+   * @throws A {@link RangeError} if `capacity` is not a positive integer.
    */
   constructor(capacity: number);
   /**
    * Creates an instance of the CVM algorithm.
    *
    * @param config - Configuration options.
+   *
+   * @defaultValue
+   * - {@link CVMConfig.randomFn} defaults to `Math.random`.
+   * - {@link CVMConfig.sampleRate} defaults to `0.5`.
+   *
+   * @throws A {@link RangeError} if a given configuration value is not within their expected range.
    */
   constructor(config: CVMConfig);
   constructor(config: number | CVMConfig) {
@@ -74,7 +88,9 @@ export class CVM<T> {
   }
 
   /**
-   * Sets capacity. Should be a positive integer.
+   * Sets capacity. Must be a positive integer.
+   *
+   * @throws A {@link RangeError} if not given a positive integer.
    */
   protected set capacity(capacity: number) {
     if (!isPositiveInt(capacity)) {
@@ -91,7 +107,10 @@ export class CVM<T> {
   }
 
   /**
-   * Sets the random number generator function, which should return values between 0 and 1.
+   * Sets the random number generator function.
+   *
+   * The function should return random or pseudorandom values between 0 and 1. Otherwise,
+   * behavior is undefined, and may cause invalid estimates, infinite loops and/or crashes.
    */
   set randomFn(randomFn: () => number) {
     this._randomFn = randomFn;
@@ -105,7 +124,9 @@ export class CVM<T> {
   }
 
   /**
-   * Sets the sample rate. Should be between 0 and 1.
+   * Sets the sample rate. Must be between 0 and 1.
+   *
+   * @throws A {@link RangeError} if not given a number between 0 and 1.
    */
   protected set sampleRate(sampleRate: number) {
     if (!isFraction(sampleRate)) {
@@ -115,16 +136,24 @@ export class CVM<T> {
   }
 
   /**
-   * Gets the current number of samples in memory.
+   * Gets the number of samples in memory.
    */
   get size(): number {
     return this._samples.size;
   }
 
   /**
-   * Adds a value to the CVM.
+   * Add a value to the CVM.
    *
-   * @param value - The value to be added.
+   * Given values may be randomly selected for sampling. If selected,
+   * the value is stored internally. Otherwise, they are ignored, or
+   * discarded if previously selected.
+   *
+   * If capacity is reached, samples are resampled,
+   * and only values that are again selected are kept.
+   * This process repeats until free space is made.
+   *
+   * @param value - The value to add.
    *
    * @returns The CVM instance.
    */

@@ -1,30 +1,36 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { calculateCapacity } from "./capacity";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { CVM } from "./cvm";
 
 /**
- * Configuration options for the CVM algorithm.
+ * Configuration options for {@link CVM}.
  */
 export interface CVMConfig {
   /**
-   * The maximum number of sample values to have in memory.
+   * The maximum number of samples in memory. Must be a positive integer.
    *
-   * Should be a positive integer.
-   *
-   * Can be calculated with {@link calculateCapacity} but
-   * can also be set arbitrarily. In general, the larger
-   * the capacity, the more accurate the estimate.
+   * This should be calculated via {@link calculateCapacity} but
+   * can also be set arbitrarily. In general, larger
+   * values give more accurate estimates.
    */
   capacity: number;
 
   /**
-   * (Optional) The random number generator function. Should return values between 0 and 1.
+   * (Optional) The random number generator function.
+   *
+   * Should return random or pseudorandom values between 0 and 1. Otherwise, behavior is undefined,
+   * and may cause invalid estimates, infinite loops and/or crashes.
    */
   randomFn?: () => number;
 
   /**
-   * (Optional) The sampling rate for managing samples. Should be between 0 and 1.
+   * (Optional) The sampling rate for managing samples.
    *
-   * @remarks Use with caution. Behavior for values other than `0.5` is undefined and may cause invalid estimates and/or increased runtime.
+   * Must be between 0 and 1.
+   *
+   * **NOTE**: This is an advanced property and should be used with caution.
+   * Behavior is undefined for values other than `0.5` and may lead to invalid estimates.
    */
   sampleRate?: number;
 }
