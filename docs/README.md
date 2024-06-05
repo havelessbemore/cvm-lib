@@ -7,7 +7,7 @@
 Estimate the number of distinct values in a set using the simple and space-efficient [CVM algorithm](https://arxiv.org/pdf/2301.10191v2).
 
 [![Version](https://img.shields.io/npm/v/cvm-lib.svg)](https://www.npmjs.com/package/cvm-lib)
-[![JSR](https://jsr.io/badges/@rojas/cvm-lib)](https://jsr.io/@rojas/cvm-lib)
+[![JSR](https://jsr.io/badges/@rojas/cvm)](https://jsr.io/@rojas/cvm)
 [![Maintenance](https://img.shields.io/maintenance/yes/2024.svg)](https://github.com/havelessbemore/cvm-lib/graphs/commit-activity)
 [![License](https://img.shields.io/github/license/havelessbemore/cvm-lib.svg)](https://github.com/havelessbemore/cvm-lib/blob/master/LICENSE)
 [![codecov](https://codecov.io/gh/havelessbemore/cvm-lib/graph/badge.svg?token=F362G7C9U0)](https://codecov.io/gh/havelessbemore/cvm-lib)
@@ -32,24 +32,20 @@ yarn add cvm-lib
 JSR:
 
 ```bash
-jsr add @rojas/cvm-lib
+jsr add @rojas/cvm
 ```
 
-## Usage
+## Examples
 
 Examples can be found in the [examples directory](./examples/).
 
 ### Hamlet
 
-Estimate the number of unique words in _Hamlet_.
-
-Run:
+Estimate the number of unique words in _Hamlet_:
 
 ```bash
 node ./examples/hamlet/index.js
 ```
-
-Example results:
 
 - Total words: ~31,000
 - Estimator capacity: 2,157
@@ -58,15 +54,11 @@ Example results:
 
 ### Much Ado About Nothing
 
-Estimate the number of unique words in _Much Ado About Nothing_.
-
-Run:
+Estimate the number of unique words in _Much Ado About Nothing_:
 
 ```bash
 node ./examples/muchAdo/index.js
 ```
-
-Example results:
 
 - Total words: ~21,000
 - Estimator capacity: 2,101
@@ -75,15 +67,11 @@ Example results:
 
 ### Romeo and Juliet
 
-Estimate the number of unique words in _Romeo and Juliet_.
-
-Run:
+Estimate the number of unique words in _Romeo and Juliet_:
 
 ```bash
 node ./examples/romeoAndJuliet/index.js
 ```
-
-Example results:
 
 - Total words: ~25,000
 - Estimator capacity: 2,126
@@ -92,43 +80,49 @@ Example results:
 
 ## API
 
-- Function: `calculateCapacity(n, epsilon, delta)`
+### Functions
 
-  Calculates the space required to estimate the number of distinct values in a set with a given accuracy and confidence.
+#### `calculateCapacity(n, epsilon, delta)`
 
-  - `n`: The total number of values in the set. Must be a positive number.
-  - `epsilon` (optional): An estimate's relative error. Controls accuracy. Must be between 0 and 1. Defaults to `0.05`.
-  - `delta` (optional): The probability an estimate is not accurate. Controls confidence. Must be between 0 and 1. Defaults to `0.01`.
+Calculates the space required to estimate the number of distinct values in a set with a given accuracy and confidence.
 
-- Class: `Estimator<T>`
+- `n`: The total number of values in the set. Must be a positive number.
+- `epsilon` (optional): An estimate's relative error. Controls accuracy. Must be between 0 and 1. Defaults to `0.05`.
+- `delta` (optional): The probability an estimate is not accurate. Controls confidence. Must be between 0 and 1. Defaults to `0.01`.
 
-  Estimates the number of distinct values in a set.
+### Classes
 
-  - Constructors
+#### `Estimator<T>`
 
-    - `new (capacity)`: Create an instance with a given capacity. Must be a positive integer.
-    - `new (config)`: Create an instance using a config object.
+Estimates the number of distinct values in a set.
 
-  - Properties
+- Constructors
 
-    - `capacity`: Gets the maximum number of samples in memory.
-    - `randomFn`: Gets or sets the random number generator function.
-    - `sampleRate` Gets the base sample rate.
-    - `size`: Gets the number of samples in memory.
+  - `new (capacity)`: Create an instance with a given capacity. Must be a positive integer.
+  - `new (config)`: Create an instance using a config object.
 
-  - Methods
+- Properties
 
-    - `add(value)`: Adds a value.
-    - `clear()`: Clears/resets the instance.
-    - `estimate()`: Gets the estimated number of distinct values.
+  - `capacity`: Gets the maximum number of samples in memory.
+  - `randomFn`: Gets or sets the random number generator function.
+  - `sampleRate` Gets the base sample rate.
+  - `size`: Gets the number of samples in memory.
 
-- Interface: `EstimatorConfig`
+- Methods
 
-  A configuration object used to create `Estimator` instances.
+  - `add(value)`: Adds a value.
+  - `clear()`: Clears/resets the instance.
+  - `estimate()`: Gets the estimated number of distinct values.
 
-  - `capacity`: The maximum number of samples in memory. Must be a positive integer.
-  - `randomFn` (optional): The random number generator function. Should return values between 0 and 1.
-  - `sampleRate` (optional): The sampling rate for managing samples. Must be between 0 and 1.
+### Interfaces
+
+#### `EstimatorConfig`
+
+A configuration object used to create `Estimator` instances.
+
+- `capacity`: The maximum number of samples in memory. Must be a positive integer.
+- `randomFn` (optional): The random number generator function. Should return values in [0, 1).
+- `sampleRate` (optional): The sampling rate for managing samples. Must be between 0 and 1.
 
 ## References
 
