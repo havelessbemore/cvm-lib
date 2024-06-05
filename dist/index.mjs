@@ -1,4 +1,30 @@
-// src/is.ts
+/*!
+ * cvm
+ * https://github.com/havelessbemore/cvm
+ *
+ * MIT License
+ *
+ * Copyright (C) 2024-2024 Michael Rojas <dev.michael.rojas@gmail.com> (https://github.com/havelessbemore)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 function isFraction(value) {
   return typeof value === "number" && value > 0 && value < 1;
 }
@@ -9,7 +35,6 @@ function isPositiveInt(value) {
   return Number.isInteger(value) && value > 0;
 }
 
-// src/capacity.ts
 function calculateCapacity(n, epsilon = 0.05, delta = 0.01) {
   if (!isPositive(n)) {
     throw new RangeError("Invalid n");
@@ -23,29 +48,31 @@ function calculateCapacity(n, epsilon = 0.05, delta = 0.01) {
   return Math.min(n, Math.ceil(Math.log2(n / delta) / epsilon ** 2));
 }
 
-// src/cvm.ts
-var CVM = class {
-  /**
-   * The maximum number of samples in memory.
-   */
-  _capacity;
-  /**
-   * The random number generator function.
-   */
-  _randomFn;
-  /**
-   * The current sample rate.
-   */
-  _rate;
-  /**
-   * The given sample rate.
-   */
-  _sampleRate;
-  /**
-   * The set of samples in memory.
-   */
-  _samples;
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+class CVM {
   constructor(config) {
+    /**
+     * The maximum number of samples in memory.
+     */
+    __publicField(this, "_capacity");
+    /**
+     * The random number generator function.
+     */
+    __publicField(this, "_randomFn");
+    /**
+     * The current sample rate.
+     */
+    __publicField(this, "_rate");
+    /**
+     * The given sample rate.
+     */
+    __publicField(this, "_sampleRate");
+    /**
+     * The set of samples in memory.
+     */
+    __publicField(this, "_samples");
     this._capacity = 1;
     this._rate = 1;
     this._randomFn = Math.random;
@@ -143,9 +170,7 @@ var CVM = class {
   estimate() {
     return this._samples.size / this._rate;
   }
-};
-export {
-  CVM,
-  calculateCapacity
-};
+}
+
+export { CVM, calculateCapacity };
 //# sourceMappingURL=index.mjs.map

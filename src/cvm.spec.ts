@@ -232,39 +232,41 @@ describe(`${CVM.name}`, () => {
       expect(cvm.size).toBeLessThan(3);
     });
 
-    test('should adjust sample rate and reduce sample size when capacity is exceeded', () => {
-      const mockRandomFn = jest.fn<() => number>()
-        .mockReturnValueOnce(0.1)  // Add 1
-        .mockReturnValueOnce(0.2)  // Add 2
-        .mockReturnValueOnce(0.1)  // Add 3
-        .mockReturnValue(0.9);     // Do not add any more
-  
+    test("should adjust sample rate and reduce sample size when capacity is exceeded", () => {
+      const mockRandomFn = jest
+        .fn<() => number>()
+        .mockReturnValueOnce(0.1) // Add 1
+        .mockReturnValueOnce(0.2) // Add 2
+        .mockReturnValueOnce(0.1) // Add 3
+        .mockReturnValue(0.9); // Do not add any more
+
       const config = { capacity: 3, sampleRate: 0.5, randomFn: mockRandomFn };
       const cvm = new CVM<number>(config);
-  
+
       for (let i = 1; i <= 4; i++) {
         cvm.add(i);
       }
-  
+
       expect(cvm.size).toBeLessThan(3);
       expect((cvm as any)._rate).toBeLessThan(1);
     });
-  
-    test('should handle duplicate values correctly', () => {
+
+    test("should handle duplicate values correctly", () => {
       const cvm = new CVM<number>(10);
       cvm.add(1);
       cvm.add(1);
       expect(cvm.size).toBe(1);
     });
-  
-    test('should return the CVM instance after adding an element', () => {
+
+    test("should return the CVM instance after adding an element", () => {
       const cvm = new CVM<number>(10);
       const returnValue = cvm.add(1);
       expect(returnValue).toBe(cvm);
     });
 
-    test('should remove elements not sampled', () => {
-      const mockRandomFn = jest.fn<() => number>()
+    test("should remove elements not sampled", () => {
+      const mockRandomFn = jest
+        .fn<() => number>()
         .mockReturnValueOnce(0.1)
         .mockReturnValueOnce(0.1)
         .mockReturnValueOnce(0.1)
@@ -327,20 +329,20 @@ describe(`${CVM.name}`, () => {
   });
 
   describe(`${CVM.prototype.estimate.name}()`, () => {
-    test('should return 0 when no elements have been added', () => {
+    test("should return 0 when no elements have been added", () => {
       const cvm = new CVM<number>(10);
       expect(cvm.estimate()).toBe(0);
     });
-  
-    test('should return the correct estimate for added elements', () => {
+
+    test("should return the correct estimate for added elements", () => {
       const cvm = new CVM<number>(10);
       cvm.add(1);
       cvm.add(2);
       cvm.add(3);
       expect(cvm.estimate()).toBe(3);
     });
-  
-    test('should return the correct estimate after clearing elements', () => {
+
+    test("should return the correct estimate after clearing elements", () => {
       const cvm = new CVM<number>(10);
       cvm.add(1);
       cvm.add(2);
@@ -348,14 +350,14 @@ describe(`${CVM.name}`, () => {
       expect(cvm.estimate()).toBe(0);
     });
 
-    test('should handle duplicate values correctly in estimate', () => {
+    test("should handle duplicate values correctly in estimate", () => {
       const cvm = new CVM<number>(10);
       cvm.add(1);
       cvm.add(1);
       expect(cvm.estimate()).toBe(1);
     });
 
-    test('should provide a valid estimate after multiple operations', () => {
+    test("should provide a valid estimate after multiple operations", () => {
       const cvm = new CVM<number>(10);
       cvm.add(1);
       cvm.add(2);

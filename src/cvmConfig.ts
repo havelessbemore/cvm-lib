@@ -23,7 +23,7 @@ export interface CVMConfig {
 
   /**
    * (Optional) The sampling rate for managing samples. Should be between 0 and 1.
-   * 
+   *
    * @remarks Use with caution. Behavior for values other than `0.5` is undefined and may cause invalid estimates and/or increased runtime.
    */
   sampleRate?: number;

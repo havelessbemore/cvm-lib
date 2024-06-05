@@ -129,7 +129,6 @@ export class CVM<T> {
    * @returns The CVM instance.
    */
   add(value: T): this {
-
     // Ignore / remove value if not sampled
     if (this._randomFn() >= this._rate) {
       this._samples.delete(value);
@@ -141,7 +140,6 @@ export class CVM<T> {
 
     // While at capacity
     while (this._samples.size >= this._capacity) {
-
       // Reduce samples to within capacity
       for (const value of this._samples) {
         if (this._randomFn() >= this._sampleRate) {
