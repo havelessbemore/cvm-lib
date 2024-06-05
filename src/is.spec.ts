@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-loss-of-precision */
 import { describe, it, expect } from "@jest/globals";
 
 import { isFraction, isPositive, isPositiveInt } from "./is";

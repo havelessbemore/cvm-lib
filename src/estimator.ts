@@ -1,14 +1,16 @@
-import { CVMConfig } from "./cvmConfig";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { calculateCapacity } from "./capacity";
+import { EstimatorConfig } from "./estimatorConfig";
 import { isFraction, isPositiveInt } from "./is";
 
 /**
  * Estimates the number of distinct values within a set
- * using a simple and space-efficient sampling strategy.
+ * using the simple and space-efficient CVM strategy.
  *
  * @see {@link https://www.quantamagazine.org/computer-scientists-invent-an-efficient-new-way-to-count-20240516/ | Nadis, S. (2024, May 16). Computer Scientists Invent an Efficient New Way to Count. Quanta Magazine.} for a high-level explanation.
  * @see {@link https://arxiv.org/pdf/2301.10191v2 | Chakraborty, S., Vinodchandran, N. V., & Meel, K. S. (2023). Distinct Elements in Streams: An Algorithm for the (Text) Book} for the source paper.
  */
-export class CVM<T> {
+export class Estimator<T> {
   /**
    * The maximum number of samples in memory.
    */
@@ -41,26 +43,22 @@ export class CVM<T> {
   protected _samples: Set<T>;
 
   /**
-   * Creates an instance of the CVM algorithm.
-   *
    * @param capacity - The maximum number of samples in memory. Must be a positive integer.
    *
    * @throws A {@link RangeError} if `capacity` is not a positive integer.
    */
   constructor(capacity: number);
   /**
-   * Creates an instance of the CVM algorithm.
-   *
-   * @param config - Configuration options.
+   * @param config - A {@link EstimatorConfig} configuration object.
    *
    * @defaultValue
-   * - {@link CVMConfig.randomFn} defaults to `Math.random`.
-   * - {@link CVMConfig.sampleRate} defaults to `0.5`.
+   * - {@link randomFn} defaults to `Math.random`.
+   * - {@link sampleRate} defaults to `0.5`.
    *
    * @throws A {@link RangeError} if a given configuration value is not within their expected range.
    */
-  constructor(config: CVMConfig);
-  constructor(config: number | CVMConfig) {
+  constructor(config: EstimatorConfig);
+  constructor(config: number | EstimatorConfig) {
     // Initialize with defaults
     this._capacity = 1;
     this._rate = 1;
@@ -90,6 +88,10 @@ export class CVM<T> {
   /**
    * Sets capacity. Must be a positive integer.
    *
+   * This should be calculated via {@link calculateCapacity} but
+   * can also be set arbitrarily. In general, larger
+   * values give more accurate estimates.
+   *
    * @throws A {@link RangeError} if not given a positive integer.
    */
   protected set capacity(capacity: number) {
@@ -109,7 +111,7 @@ export class CVM<T> {
   /**
    * Sets the random number generator function.
    *
-   * The function should return random or pseudorandom values between 0 and 1. Otherwise,
+   * The function should return random or pseudorandom values in [0, 1). Otherwise,
    * behavior is undefined, and may cause invalid estimates, infinite loops and/or crashes.
    */
   set randomFn(randomFn: () => number) {
@@ -125,6 +127,9 @@ export class CVM<T> {
 
   /**
    * Sets the sample rate. Must be between 0 and 1.
+   *
+   * **NOTE**: This is an advanced property and should be used with caution.
+   * Behavior is undefined for values other than `0.5` and may lead to invalid estimates.
    *
    * @throws A {@link RangeError} if not given a number between 0 and 1.
    */
@@ -143,7 +148,7 @@ export class CVM<T> {
   }
 
   /**
-   * Add a value to the CVM.
+   * Add a value.
    *
    * Given values may be randomly selected for sampling. If selected,
    * the value is stored internally. Otherwise, they are ignored, or
@@ -155,7 +160,7 @@ export class CVM<T> {
    *
    * @param value - The value to add.
    *
-   * @returns The CVM instance.
+   * @returns The instance.
    */
   add(value: T): this {
     // Ignore / remove value if not sampled
@@ -184,7 +189,7 @@ export class CVM<T> {
   }
 
   /**
-   * Clears / resets the CVM.
+   * Clears / resets the instance.
    */
   clear(): void {
     this._rate = 1;

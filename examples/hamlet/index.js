@@ -3,7 +3,7 @@ import path from "node:path";
 import readline from "node:readline";
 import url from "node:url";
 
-import { calculateCapacity, CVM } from "../../dist/index.mjs";
+import { calculateCapacity, Estimator } from "../../dist/index.mjs";
 
 import meta from "./meta.json" with { type: "json" };
 
@@ -36,12 +36,12 @@ async function main() {
 
   // Get estimate; expect 90% accuracy, with 99% confidence
   const capacity = calculateCapacity(meta.total, expectedRelErr, 0.01);
-  const cvm = new CVM(capacity);
+  const cvm = new Estimator(capacity);
   for await (const word of getWords(inputPath)) {
     cvm.add(word);
   }
   const actual = cvm.estimate();
-  const actualRelErr = 1 - actual / meta.unique;
+  const actualRelErr = actual / meta.unique - 1;
 
   // Print results
   console.log(`Capacity: ${capacity}`);

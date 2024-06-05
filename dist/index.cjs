@@ -1,6 +1,6 @@
 /*!
- * cvm
- * https://github.com/havelessbemore/cvm
+ * cvm-lib
+ * https://github.com/havelessbemore/cvm-lib
  *
  * MIT License
  *
@@ -53,7 +53,7 @@ function calculateCapacity(n, epsilon = 0.05, delta = 0.01) {
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-class CVM {
+class Estimator {
   constructor(config) {
     /**
      * The maximum number of samples in memory.
@@ -103,6 +103,10 @@ class CVM {
   /**
    * Sets capacity. Must be a positive integer.
    *
+   * This should be calculated via {@link calculateCapacity} but
+   * can also be set arbitrarily. In general, larger
+   * values give more accurate estimates.
+   *
    * @throws A {@link RangeError} if not given a positive integer.
    */
   set capacity(capacity) {
@@ -120,7 +124,7 @@ class CVM {
   /**
    * Sets the random number generator function.
    *
-   * The function should return random or pseudorandom values between 0 and 1. Otherwise,
+   * The function should return random or pseudorandom values in [0, 1). Otherwise,
    * behavior is undefined, and may cause invalid estimates, infinite loops and/or crashes.
    */
   set randomFn(randomFn) {
@@ -134,6 +138,9 @@ class CVM {
   }
   /**
    * Sets the sample rate. Must be between 0 and 1.
+   *
+   * **NOTE**: This is an advanced property and should be used with caution.
+   * Behavior is undefined for values other than `0.5` and may lead to invalid estimates.
    *
    * @throws A {@link RangeError} if not given a number between 0 and 1.
    */
@@ -150,7 +157,7 @@ class CVM {
     return this._samples.size;
   }
   /**
-   * Add a value to the CVM.
+   * Add a value.
    *
    * Given values may be randomly selected for sampling. If selected,
    * the value is stored internally. Otherwise, they are ignored, or
@@ -162,7 +169,7 @@ class CVM {
    *
    * @param value - The value to add.
    *
-   * @returns The CVM instance.
+   * @returns The instance.
    */
   add(value) {
     if (this._randomFn() >= this._rate) {
@@ -181,7 +188,7 @@ class CVM {
     return this;
   }
   /**
-   * Clears / resets the CVM.
+   * Clears / resets the instance.
    */
   clear() {
     this._rate = 1;
@@ -195,6 +202,6 @@ class CVM {
   }
 }
 
-exports.CVM = CVM;
+exports.Estimator = Estimator;
 exports.calculateCapacity = calculateCapacity;
 //# sourceMappingURL=index.cjs.map

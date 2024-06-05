@@ -1,5 +1,5 @@
-export { type CVMConfig } from "./cvmConfig";
+export { type EstimatorConfig } from "./estimatorConfig";
 
 export { calculateCapacity } from "./capacity";
 
-export { CVM } from "./cvm";
+export { Estimator } from "./estimator";

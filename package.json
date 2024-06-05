@@ -1,12 +1,12 @@
 {
   "$schema": "http://json.schemastore.org/package",
-  "name": "cvm",
+  "name": "cvm-lib",
   "version": "0.0.1",
-  "description": "",
+  "description": "Estimate the number of distinct values in a set using the simple and space-efficient CVM algorithm",
   "license": "MIT",
   "author": "Michael Rojas <dev.michael.rojas@gmail.com> (https://github.com/havelessbemore)",
-  "homepage": "https://github.com/havelessbemore/cvm",
-  "bugs": "https://github.com/havelessbemore/cvm/issues",
+  "homepage": "https://github.com/havelessbemore/cvm-lib",
+  "bugs": "https://github.com/havelessbemore/cvm-lib/issues",
   "sideEffects": false,
   "engines": {
     "node": ">= 18"
@@ -27,13 +27,13 @@
   },
   "keywords": [
     "algorithm",
+    "cardinality estimation",
+    "count distinct",
     "cvm",
-    "distinct elements problem",
+    "distinct",
     "estimate",
-    "estimation problem",
     "estimator",
     "sampling",
-    "sketching",
     "streaming",
     "unique"
   ],

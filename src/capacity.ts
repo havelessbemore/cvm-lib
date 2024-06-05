@@ -7,19 +7,19 @@ import { isFraction, isPositive } from "./is";
  * @param n - The total number of values in the set, or an estimate if unknown.
  *
  * - Must be a positive number.
- * - If unknown, an overestimate is better, but results in more space.
+ * - If unknown, an overestimate is better, but results in more required space.
  *
  * @param epsilon - An estimate's relative error. Controls accuracy.
  *
  * - Must be between 0 and 1.
- * - Smaller values equal more accuracy but more space.
+ * - Smaller values equal more accuracy but more required space.
  * - Defaults to `0.05` (i.e. 95% accuracy; estimates can range within ±5% of the true value).
  *
  * @param delta - The probability an estimate is not accurate. Controls confidence.
  *
  * - Must be between 0 and 1.
- * - Smaller values equal higher confidence but more space.
- * - Defaults to `0.01` (i.e. 99% confidence; there is a 1% chance an estimate is less accurate than expected by `epsilon`).
+ * - Smaller values equal higher confidence but more required space.
+ * - Defaults to `0.01` (i.e. 99% confidence; there is a 1% chance an estimate is less accurate than expected).
  *
  * @returns The calculated capacity.
  *
@@ -50,7 +50,7 @@ import { isFraction, isPositive } from "./is";
  * ```javascript
  *  // Get the capacity for estimating the number
  *  // of distinct values in a set of 1 billion.
- *  // Estimates will have a 80% probability of
+ *  // Estimates will have an 80% probability of
  *  // being within ±5% of the actual number.
  *  const capacity = calculateCapacity(1e9, 0.05, 0.2); // 12,888
  * ```

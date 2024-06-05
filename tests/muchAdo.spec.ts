@@ -3,7 +3,7 @@ import url from "node:url";
 
 import { describe, it, expect } from "@jest/globals";
 
-import { calculateCapacity, CVM } from "../src";
+import { calculateCapacity, Estimator } from "../src";
 import meta from "../examples/muchAdo/meta.json" with { type: "json" };
 import { getWords } from "./utils";
 
@@ -15,12 +15,12 @@ describe(`Hamlet`, () => {
     const inputPath = path.resolve(__dirname, "../examples/muchAdo/input.txt");
     const expectedRelErr = 0.1;
     const capacity = calculateCapacity(meta.total, expectedRelErr, 0.01);
-    const cvm = new CVM<string>(capacity);
+    const cvm = new Estimator<string>(capacity);
     for await (const word of getWords(inputPath)) {
       cvm.add(word);
     }
     const estimate = cvm.estimate();
-    const actualRelErr = 1 - estimate / meta.unique;
+    const actualRelErr = estimate / meta.unique - 1;
     expect(Math.abs(actualRelErr)).toBeLessThanOrEqual(expectedRelErr);
   });
 });

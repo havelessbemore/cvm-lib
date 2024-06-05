@@ -1,12 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { calculateCapacity } from "./capacity";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { CVM } from "./cvm";
+import { Estimator } from "./estimator";
 
 /**
- * Configuration options for {@link CVM}.
+ * Configuration options for the {@link Estimator} class.
  */
-export interface CVMConfig {
+export interface EstimatorConfig {
   /**
    * The maximum number of samples in memory. Must be a positive integer.
    *
@@ -19,7 +19,7 @@ export interface CVMConfig {
   /**
    * (Optional) The random number generator function.
    *
-   * Should return random or pseudorandom values between 0 and 1. Otherwise, behavior is undefined,
+   * Should return random or pseudorandom values in [0, 1). Otherwise, behavior is undefined,
    * and may cause invalid estimates, infinite loops and/or crashes.
    */
   randomFn?: () => number;
