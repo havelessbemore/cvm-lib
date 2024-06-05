@@ -12,7 +12,7 @@ We strive to keep CVM secure for everyone. We welcome your help in disclosing vu
 
 If you have discovered a security vulnerability, please report it privately to us as follows:
 
-1. Go to the project's [Security](https://github.com/havelessbemore/cvm/security) tab on GitHub.
+1. Go to the project's [Security](https://github.com/havelessbemore/cvm-lib/security) tab on GitHub.
 2. Click on "Report a vulnerability".
 
 Please include as much information as possible with your report, such as:
