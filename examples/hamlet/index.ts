@@ -41,9 +41,9 @@ async function main(filePath: string, capacity: number): Promise<void> {
   console.table([
     {
       Expected: INPUT_UNIQS,
-      Actual: cvm.estimate,
+      Actual: cvm.estimate(),
       "Expected Error (%)": `±${(100 * (1 - CVM_ACCURACY)).toFixed(2)}`,
-      "Actual Error (%)": (100 - (100 * cvm.estimate) / INPUT_UNIQS).toFixed(2),
+      "Actual Error (%)": (100 - (100 * cvm.estimate()) / INPUT_UNIQS).toFixed(2),
     },
   ]);
 }
