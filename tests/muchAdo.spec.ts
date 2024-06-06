@@ -11,7 +11,7 @@ const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const meta = createRequire(__filename)("../examples/muchAdo/meta.json");
 
-describe(`Hamlet`, () => {
+describe(`Much Ado About Nothing`, () => {
   it("Should accurately estimate distinct words", async () => {
     const inputPath = path.resolve(__dirname, "../examples/muchAdo/input.txt");
     const expectedRelErr = 0.1;
