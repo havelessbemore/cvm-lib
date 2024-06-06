@@ -43,10 +43,10 @@ Estimate the number of unique words in _Hamlet_:
 node ./examples/hamlet/index.js
 ```
 
-- Total words: ~31,000
-- Estimator capacity: 2,157
-- Expected: 4,762 (±10%)
-- Actual: 4,712 (-1.05%)
+- Total words: 31991
+- CVM capacity: 2161
+- Expected uniques: 4762 ± 10.00%
+- Estimated uniques: 4728 (-0.71%)
 
 ### Much Ado About Nothing
 
@@ -56,10 +56,10 @@ Estimate the number of unique words in _Much Ado About Nothing_:
 node ./examples/muchAdo/index.js
 ```
 
-- Total words: ~21,000
-- Estimator capacity: 2,101
-- Expected: 2,978 (±10%)
-- Actual: 3,002 (0.81%)
+- Total words: 22417
+- CVM capacity: 2107
+- Expected uniques: 2978 ± 10.00%
+- Estimated uniques: 3026 (1.61%)
 
 ### Romeo and Juliet
 
@@ -69,10 +69,10 @@ Estimate the number of unique words in _Romeo and Juliet_:
 node ./examples/romeoAndJuliet/index.js
 ```
 
-- Total words: ~25,000
-- Estimator capacity: 2,126
-- Expected: 3,740 (±10%)
-- Actual: 3,732 (-0.21%)
+- Total words: 25637
+- CVM capacity: 2132
+- Expected uniques: 3740 ± 10.00%
+- Estimated uniques: 3736 (-0.11%)
 
 ## API
 
@@ -126,12 +126,6 @@ A configuration object used to create `Estimator` instances.
 - `sampleRate` (optional): The sampling rate for managing samples. Must be between 0 and 1.
   - **Note:** Behavior is undefined for values other than `0.5`. Use with caution as it may
     cause invalid estimates.
-
-## References
-
-1. Source paper: [Chakraborty, S., Vinodchandran, N. V., & Meel, K. S. (2023). Distinct Elements in Streams: An Algorithm for the (Text) Book](https://arxiv.org/pdf/2301.10191v2)
-1. Notes by Donald Knuth: [Knuth, D. E. (2023). The CVM Algorithm for Estimating Distinct Elements in Streams. Stanford Computer Science Department](https://cs.stanford.edu/~knuth/papers/cvm-note.pdf).
-1. Wikipedia: [CVM Algorithm](https://en.wikipedia.org/wiki/Count-distinct_problem#CVM_Algorithm).
 
 ## Community and Support
 
@@ -199,3 +193,9 @@ npm run test:coverage
 ```
 
 A coverage report is generated at `./coverage/index.html`.
+
+## References
+
+1. Source paper: [Chakraborty, S., Vinodchandran, N. V., & Meel, K. S. (2023). Distinct Elements in Streams: An Algorithm for the (Text) Book](https://arxiv.org/pdf/2301.10191v2)
+1. Notes by Donald Knuth: [Knuth, D. E. (2023). The CVM Algorithm for Estimating Distinct Elements in Streams. Stanford Computer Science Department](https://cs.stanford.edu/~knuth/papers/cvm-note.pdf).
+1. Wikipedia: [CVM Algorithm](https://en.wikipedia.org/wiki/Count-distinct_problem#CVM_Algorithm).
