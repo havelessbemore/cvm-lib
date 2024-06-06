@@ -40,13 +40,13 @@ export default [
     plugins: [esbuild(), license(licenseConfig)],
     output: [
       {
-        file: pkg.publishConfig.main,
+        file: pkg.main,
         format: "cjs",
         sourcemap: true,
         exports: "named",
       },
       {
-        file: pkg.publishConfig.module,
+        file: pkg.module,
         format: "es",
         sourcemap: true,
         exports: "named",
@@ -56,7 +56,7 @@ export default [
   bundle({
     plugins: [dts()],
     output: {
-      file: pkg.publishConfig.types,
+      file: pkg.types,
       format: "es",
     },
   }),

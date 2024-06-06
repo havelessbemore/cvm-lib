@@ -85,4 +85,4 @@ A RangeError for any of the following:
 
 ## Source
 
-[capacity.ts:67](https://github.com/havelessbemore/cvm-lib/blob/b4dca7882facea7cffbdb400f21150f15e7e4c83/src/capacity.ts#L67)
+[capacity.ts:67](https://github.com/havelessbemore/cvm-lib/blob/7e22f1c193ccd7d3642195a0e0bd93b2a7a6ad5b/src/capacity.ts#L67)
