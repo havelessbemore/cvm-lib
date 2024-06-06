@@ -48,8 +48,12 @@ async function main() {
   // Print results
   console.log(`Total words: ${wordCount}`);
   console.log(`CVM capacity: ${cvm.capacity}`);
-  console.log(`Expected uniques: ${expected} ± ${(100 * expectedRelErr).toFixed(2)}%`);
-  console.log(`Estimated uniques: ${actual} (${(100 * actualRelErr).toFixed(2)}%)`);
+  console.log(
+    `Expected uniques: ${expected} ± ${(100 * expectedRelErr).toFixed(2)}%`,
+  );
+  console.log(
+    `Estimated uniques: ${actual} (${(100 * actualRelErr).toFixed(2)}%)`,
+  );
 }
 
 if (process.argv[1] === __filename) {
