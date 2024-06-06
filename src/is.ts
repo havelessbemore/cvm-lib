@@ -1,26 +1,26 @@
 /**
- * Returns `true` if the value is between 0 and 1, `false` otherwise.
+ * Returns `true` if the value passed is between 0 and 1, `false` otherwise.
  *
- * @param value - The value.
+ * @param number - A numeric value.
  */
-export function isFraction(value: unknown): value is number {
-  return typeof value === "number" && value > 0 && value < 1;
+export function isFraction(number: unknown): number is number {
+  return typeof number === "number" && number > 0 && number < 1;
 }
 
 /**
- * Returns `true` if the value is a positive number, `false` otherwise.
+ * Returns `true` if the value passed is a positive number, `false` otherwise.
  *
- * @param value - The value.
+ * @param number - A numeric value.
  */
-export function isPositive(value: unknown): value is number {
-  return typeof value === "number" && value > 0;
+export function isPositive(number: unknown): number is number {
+  return typeof number === "number" && number > 0;
 }
 
 /**
- * Returns `true` if the value is a positive integer, `false` otherwise.
+ * Returns `true` if the value passed is a positive integer, `false` otherwise.
  *
- * @param value - The value.
+ * @param number - A numeric value.
  */
-export function isPositiveInt(value: unknown): value is number {
-  return Number.isInteger(value) && (value as number) > 0;
+export function isPositiveInt(number: unknown): number is number {
+  return Number.isInteger(number) && (number as number) > 0;
 }
