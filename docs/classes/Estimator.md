@@ -6,13 +6,7 @@
 
 # Class: Estimator\<T\>
 
-Estimates the number of distinct values within a set
-using the simple and space-efficient CVM strategy.
-
-## See
-
- - [Nadis, S. (2024, May 16). Computer Scientists Invent an Efficient New Way to Count. Quanta Magazine.](https://www.quantamagazine.org/computer-scientists-invent-an-efficient-new-way-to-count-20240516/) for a high-level explanation.
- - [Chakraborty, S., Vinodchandran, N. V., & Meel, K. S. (2023). Distinct Elements in Streams: An Algorithm for the (Text) Book](https://arxiv.org/pdf/2301.10191v2) for the source paper.
+Estimates the number of distinct values in a set using the CVM algorithm.
 
 ## Type parameters
 
@@ -40,7 +34,7 @@ A RangeError if `capacity` is not a positive integer.
 
 #### Source
 
-[estimator.ts:50](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L50)
+[estimator.ts:46](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L46)
 
 ### new Estimator()
 
@@ -50,7 +44,7 @@ A RangeError if `capacity` is not a positive integer.
 
 • **config**: [`EstimatorConfig`](../interfaces/EstimatorConfig.md)
 
-A [EstimatorConfig](../interfaces/EstimatorConfig.md) configuration object.
+An [EstimatorConfig](../interfaces/EstimatorConfig.md) configuration object.
 
 #### Returns
 
@@ -58,16 +52,16 @@ A [EstimatorConfig](../interfaces/EstimatorConfig.md) configuration object.
 
 #### Default Value
 
-- [randomFn](Estimator.md#randomfn) defaults to `Math.random`.
-- [sampleRate](Estimator.md#samplerate) defaults to `0.5`.
+- [randomFn](Estimator.md#randomfn) - `Math.random`.
+- [sampleRate](Estimator.md#samplerate) - `0.5`.
 
 #### Throws
 
-A RangeError if a given configuration value is not within their expected range.
+A RangeError if a given configuration is not within their expected range.
 
 #### Source
 
-[estimator.ts:60](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L60)
+[estimator.ts:56](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L56)
 
 ## Properties
 
@@ -79,7 +73,7 @@ The maximum number of samples in memory.
 
 #### Source
 
-[estimator.ts:17](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L17)
+[estimator.ts:13](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L13)
 
 ***
 
@@ -99,7 +93,7 @@ The random number generator function.
 
 #### Source
 
-[estimator.ts:24](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L24)
+[estimator.ts:20](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L20)
 
 ***
 
@@ -115,7 +109,7 @@ Initializes to `1`.
 
 #### Source
 
-[estimator.ts:31](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L31)
+[estimator.ts:27](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L27)
 
 ***
 
@@ -131,7 +125,7 @@ The given sample rate.
 
 #### Source
 
-[estimator.ts:38](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L38)
+[estimator.ts:34](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L34)
 
 ***
 
@@ -143,7 +137,7 @@ The set of samples in memory.
 
 #### Source
 
-[estimator.ts:43](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L43)
+[estimator.ts:39](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L39)
 
 ## Accessors
 
@@ -175,7 +169,7 @@ A RangeError if not given a positive integer.
 
 #### Source
 
-[estimator.ts:84](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L84)
+[estimator.ts:80](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L80)
 
 ***
 
@@ -206,7 +200,7 @@ Otherwise, this may cause unintended behavior such as invalid estimates.
 
 #### Source
 
-[estimator.ts:107](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L107)
+[estimator.ts:103](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L103)
 
 ***
 
@@ -220,8 +214,12 @@ Gets the sample rate.
 
 Sets the sample rate. Must be between 0 and 1.
 
-**NOTE**: This is an advanced property and should be used with caution.
-Behavior is undefined for values other than `0.5` and may lead to invalid estimates.
+#### Remarks
+
+Custom values may negatively affect accuracy. In general, the
+further from `0.5`, the more it's affected. If [capacity](Estimator.md#capacity) was
+calculated via [calculateCapacity](../functions/calculateCapacity.md), expected accuracy / confidence
+may be invalidated.
 
 #### Throws
 
@@ -237,7 +235,7 @@ A RangeError if not given a number between 0 and 1.
 
 #### Source
 
-[estimator.ts:124](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L124)
+[estimator.ts:120](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L120)
 
 ***
 
@@ -253,7 +251,7 @@ Gets the number of samples in memory.
 
 #### Source
 
-[estimator.ts:146](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L146)
+[estimator.ts:144](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L144)
 
 ## Methods
 
@@ -285,7 +283,7 @@ The instance.
 
 #### Source
 
-[estimator.ts:165](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L165)
+[estimator.ts:163](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L163)
 
 ***
 
@@ -301,7 +299,7 @@ Clears / resets the instance.
 
 #### Source
 
-[estimator.ts:194](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L194)
+[estimator.ts:192](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L192)
 
 ***
 
@@ -317,4 +315,4 @@ Gets the estimated number of distinct values.
 
 #### Source
 
-[estimator.ts:202](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimator.ts#L202)
+[estimator.ts:200](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimator.ts#L200)

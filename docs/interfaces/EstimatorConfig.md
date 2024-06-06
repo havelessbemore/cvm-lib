@@ -22,7 +22,7 @@ values give more accurate estimates.
 
 #### Source
 
-[estimatorConfig.ts:17](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimatorConfig.ts#L17)
+[estimatorConfig.ts:17](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimatorConfig.ts#L17)
 
 ***
 
@@ -41,7 +41,7 @@ Otherwise, this may cause unintended behavior such as invalid estimates.
 
 #### Source
 
-[estimatorConfig.ts:25](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimatorConfig.ts#L25)
+[estimatorConfig.ts:25](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimatorConfig.ts#L25)
 
 ***
 
@@ -53,9 +53,13 @@ Otherwise, this may cause unintended behavior such as invalid estimates.
 
 Must be between 0 and 1.
 
-**NOTE**: This is an advanced property and should be used with caution.
-Behavior is undefined for values other than `0.5` and may lead to invalid estimates.
+#### Remarks
+
+Custom values may negatively affect accuracy. In general, the
+further from `0.5`, the more it's affected. If [capacity](EstimatorConfig.md#capacity) was
+calculated via [calculateCapacity](../functions/calculateCapacity.md), expected accuracy / confidence
+may be invalidated.
 
 #### Source
 
-[estimatorConfig.ts:35](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/estimatorConfig.ts#L35)
+[estimatorConfig.ts:37](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/estimatorConfig.ts#L37)

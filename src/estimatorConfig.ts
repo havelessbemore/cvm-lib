@@ -29,8 +29,10 @@ export interface EstimatorConfig {
    *
    * Must be between 0 and 1.
    *
-   * **NOTE**: This is an advanced property and should be used with caution.
-   * Behavior is undefined for values other than `0.5` and may lead to invalid estimates.
+   * @remarks Custom values may negatively affect accuracy. In general, the
+   * further from `0.5`, the more it's affected. If {@link capacity} was
+   * calculated via {@link calculateCapacity}, expected accuracy / confidence
+   * may be invalidated.
    */
   sampleRate?: number;
 }

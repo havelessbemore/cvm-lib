@@ -33,11 +33,11 @@ jsr add @rojas/cvm
 
 ## Examples
 
-Examples can be found in the [examples directory](./examples/).
+See the [examples/](./examples/) directory for all examples.
 
 ### Hamlet
 
-Estimate the number of unique words in _Hamlet_:
+Estimate unique words in Shakespeare's _Hamlet_:
 
 ```bash
 node ./examples/hamlet/index.js
@@ -48,41 +48,28 @@ node ./examples/hamlet/index.js
 - Expected uniques: 4762 ± 10.00%
 - Estimated uniques: 4728 (-0.71%)
 
-### Much Ado About Nothing
+### 1M
 
-Estimate the number of unique words in _Much Ado About Nothing_:
-
-```bash
-node ./examples/muchAdo/index.js
-```
-
-- Total words: 22417
-- CVM capacity: 2107
-- Expected uniques: 2978 ± 10.00%
-- Estimated uniques: 3026 (1.61%)
-
-### Romeo and Juliet
-
-Estimate the number of unique words in _Romeo and Juliet_:
+Estimate unique integers among 1 million random integers.
 
 ```bash
-node ./examples/romeoAndJuliet/index.js
+node ./examples/hamlet/index.js
 ```
 
-- Total words: 25637
-- CVM capacity: 2132
-- Expected uniques: 3740 ± 10.00%
-- Estimated uniques: 3736 (-0.11%)
+- Total values: 1000000
+- CVM capacity: 2658
+- Expected uniques: 994422 ± 10.00%
+- Estimated uniques: 1003520 (0.91%)
 
 ## API
 
 ### Functions
 
-#### `calculateCapacity(n, epsilon, delta)`
+#### `calculateCapacity(n, epsilon?, delta?)`
 
 Calculates the space required to estimate the number of distinct values in a set with a given accuracy and confidence.
 
-- `n`: The total number of values in the set. Must be a positive number.
+- `n`: The total number of values in the set, or an estimate if unknown. Must be a positive number.
 - `epsilon` (optional): An estimate's relative error. Controls accuracy. Must be between 0 and 1. Defaults to `0.05`.
 - `delta` (optional): The probability an estimate is not accurate. Controls confidence. Must be between 0 and 1. Defaults to `0.01`.
 
@@ -90,21 +77,18 @@ Calculates the space required to estimate the number of distinct values in a set
 
 #### `Estimator<T>`
 
-Estimates the number of distinct values in a set.
+Estimates the number of distinct values in a set using the CVM algorithm.
 
 - Constructors
 
   - `new (capacity)`: Create an instance with a given capacity. Must be a positive integer.
-    - Defaults:
-      - `randomFn`: `Math.random`.
-      - `sampleRate`: `0.5`.
   - `new (config)`: Create an instance using a config object.
 
 - Properties
 
   - `capacity`: Gets the maximum number of samples in memory.
-  - `randomFn`: Gets or sets the random number generator function.
-  - `sampleRate` Gets the base sample rate.
+  - `randomFn`: Gets or sets the random number generator function (e.g. `Math.random`).
+  - `sampleRate` Gets the base sample rate (e.g. `0.5`).
   - `size`: Gets the number of samples in memory.
 
 - Methods
@@ -120,12 +104,11 @@ Estimates the number of distinct values in a set.
 A configuration object used to create `Estimator` instances.
 
 - `capacity`: The maximum number of samples in memory. Must be a positive integer.
-- `randomFn` (optional): The random number generator function.
-  - The function should return random or pseudorandom values between 0 and 1.
-    Otherwise, this may cause unintended behavior such as invalid estimates.
+- `randomFn` (optional): The random number generator function. Should return random or pseudorandom values between 0 and 1.
 - `sampleRate` (optional): The sampling rate for managing samples. Must be between 0 and 1.
-  - **Note:** Behavior is undefined for values other than `0.5`. Use with caution as it may
-    cause invalid estimates.
+  - **Note:** Custom values may negatively affect accuracy. In general, the further from
+    `0.5`, the more it's affected. If `capacity` was calculated via `calculateCapacity`,
+    expected accuracy / confidence may be invalidated.
 
 ## Community and Support
 
@@ -199,3 +182,4 @@ A coverage report is generated at `./coverage/index.html`.
 1. Source paper: [Chakraborty, S., Vinodchandran, N. V., & Meel, K. S. (2023). Distinct Elements in Streams: An Algorithm for the (Text) Book](https://arxiv.org/pdf/2301.10191v2)
 1. Notes by Donald Knuth: [Knuth, D. E. (2023). The CVM Algorithm for Estimating Distinct Elements in Streams. Stanford Computer Science Department](https://cs.stanford.edu/~knuth/papers/cvm-note.pdf).
 1. Wikipedia: [CVM Algorithm](https://en.wikipedia.org/wiki/Count-distinct_problem#CVM_Algorithm).
+1. High-level summary: [Nadis, S. (2024, May 16). Computer Scientists Invent an Efficient New Way to Count. Quanta Magazine.](https://www.quantamagazine.org/computer-scientists-invent-an-efficient-new-way-to-count-20240516/).

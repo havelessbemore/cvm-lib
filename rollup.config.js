@@ -4,7 +4,7 @@ import dts from "rollup-plugin-dts";
 import esbuild from "rollup-plugin-esbuild";
 import license from "rollup-plugin-license";
 
-const pkg = createRequire(import.meta.url)("./meta.json");
+const pkg = createRequire(import.meta.url)("./package.json");
 
 /**
  * @param {import('rollup').RollupOptions} config

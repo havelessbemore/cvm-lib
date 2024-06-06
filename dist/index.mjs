@@ -25,14 +25,14 @@
  * SOFTWARE.
  */
 
-function isFraction(value) {
-  return typeof value === "number" && value > 0 && value < 1;
+function isFraction(number) {
+  return typeof number === "number" && number > 0 && number < 1;
 }
-function isPositive(value) {
-  return typeof value === "number" && value > 0;
+function isPositive(number) {
+  return typeof number === "number" && number > 0;
 }
-function isPositiveInt(value) {
-  return Number.isInteger(value) && value > 0;
+function isPositiveInt(number) {
+  return Number.isInteger(number) && number > 0;
 }
 
 function calculateCapacity(n, epsilon = 0.05, delta = 0.01) {
@@ -137,8 +137,10 @@ class Estimator {
   /**
    * Sets the sample rate. Must be between 0 and 1.
    *
-   * **NOTE**: This is an advanced property and should be used with caution.
-   * Behavior is undefined for values other than `0.5` and may lead to invalid estimates.
+   * @remarks Custom values may negatively affect accuracy. In general, the
+   * further from `0.5`, the more it's affected. If {@link capacity} was
+   * calculated via {@link calculateCapacity}, expected accuracy / confidence
+   * may be invalidated.
    *
    * @throws A {@link RangeError} if not given a number between 0 and 1.
    */

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/package",
   "name": "cvm-lib",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Estimate the number of distinct values in a set using the simple and space-efficient CVM algorithm",
   "license": "MIT",
   "author": "Michael Rojas <dev.michael.rojas@gmail.com> (https://github.com/havelessbemore)",

@@ -18,7 +18,7 @@ distinct values in a set with a given accuracy and confidence.
 The total number of values in the set, or an estimate if unknown.
 
 - Must be a positive number.
-- If unknown, an overestimate is better, but results in more required space.
+- If unknown, an overestimate is better, but requires more space.
 
 • **epsilon**: `number`= `0.05`
 
@@ -85,4 +85,4 @@ A RangeError for any of the following:
 
 ## Source
 
-[capacity.ts:67](https://github.com/havelessbemore/cvm-lib/blob/b33b73a56ce226efcf5a478673aa1f6e9864ce78/src/capacity.ts#L67)
+[capacity.ts:67](https://github.com/havelessbemore/cvm-lib/blob/00d67aa680e699adbec2926057fff1baf3d12c83/src/capacity.ts#L67)

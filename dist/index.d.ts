@@ -22,8 +22,10 @@ interface EstimatorConfig {
      *
      * Must be between 0 and 1.
      *
-     * **NOTE**: This is an advanced property and should be used with caution.
-     * Behavior is undefined for values other than `0.5` and may lead to invalid estimates.
+     * @remarks Custom values may negatively affect accuracy. In general, the
+     * further from `0.5`, the more it's affected. If {@link capacity} was
+     * calculated via {@link calculateCapacity}, expected accuracy / confidence
+     * may be invalidated.
      */
     sampleRate?: number;
 }
@@ -35,7 +37,7 @@ interface EstimatorConfig {
  * @param n - The total number of values in the set, or an estimate if unknown.
  *
  * - Must be a positive number.
- * - If unknown, an overestimate is better, but results in more required space.
+ * - If unknown, an overestimate is better, but requires more space.
  *
  * @param epsilon - An estimate's relative error. Controls accuracy.
  *
@@ -95,11 +97,7 @@ interface EstimatorConfig {
 declare function calculateCapacity(n: number, epsilon?: number, delta?: number): number;
 
 /**
- * Estimates the number of distinct values within a set
- * using the simple and space-efficient CVM strategy.
- *
- * @see {@link https://www.quantamagazine.org/computer-scientists-invent-an-efficient-new-way-to-count-20240516/ | Nadis, S. (2024, May 16). Computer Scientists Invent an Efficient New Way to Count. Quanta Magazine.} for a high-level explanation.
- * @see {@link https://arxiv.org/pdf/2301.10191v2 | Chakraborty, S., Vinodchandran, N. V., & Meel, K. S. (2023). Distinct Elements in Streams: An Algorithm for the (Text) Book} for the source paper.
+ * Estimates the number of distinct values in a set using the CVM algorithm.
  */
 declare class Estimator<T> {
     /**
@@ -135,13 +133,13 @@ declare class Estimator<T> {
      */
     constructor(capacity: number);
     /**
-     * @param config - A {@link EstimatorConfig} configuration object.
+     * @param config - An {@link EstimatorConfig} configuration object.
      *
      * @defaultValue
-     * - {@link randomFn} defaults to `Math.random`.
-     * - {@link sampleRate} defaults to `0.5`.
+     * - {@link randomFn} - `Math.random`.
+     * - {@link sampleRate} - `0.5`.
      *
-     * @throws A {@link RangeError} if a given configuration value is not within their expected range.
+     * @throws A {@link RangeError} if a given configuration is not within their expected range.
      */
     constructor(config: EstimatorConfig);
     /**
@@ -176,8 +174,10 @@ declare class Estimator<T> {
     /**
      * Sets the sample rate. Must be between 0 and 1.
      *
-     * **NOTE**: This is an advanced property and should be used with caution.
-     * Behavior is undefined for values other than `0.5` and may lead to invalid estimates.
+     * @remarks Custom values may negatively affect accuracy. In general, the
+     * further from `0.5`, the more it's affected. If {@link capacity} was
+     * calculated via {@link calculateCapacity}, expected accuracy / confidence
+     * may be invalidated.
      *
      * @throws A {@link RangeError} if not given a number between 0 and 1.
      */
