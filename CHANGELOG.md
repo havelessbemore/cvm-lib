@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.0.5](https://github.com/havelessbemore/munkres/compare/v0.0.4...v0.0.5) (2024-06-??)
+
+### What's Changed
+
+- Update package entry points.
+- Fix broken link in README.md.
+
 ## [0.0.4](https://github.com/havelessbemore/munkres/compare/v0.0.3...v0.0.4) (2024-06-06)
 
 ### What's Changed
