@@ -7,7 +7,7 @@ import { isFraction, isPositive } from "./is";
  * @param n - The total number of values in the set, or an estimate if unknown.
  *
  * - Must be a positive number.
- * - If unknown, an overestimate is better, but results in more required space.
+ * - If unknown, an overestimate is better, but requires more space.
  *
  * @param epsilon - An estimate's relative error. Controls accuracy.
  *
