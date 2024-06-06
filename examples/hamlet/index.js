@@ -56,6 +56,4 @@ async function main() {
   );
 }
 
-if (process.argv[1] === __filename) {
-  main();
-}
+main();
