@@ -30,7 +30,6 @@ async function* getWords(filePath) {
 }
 
 async function main() {
-  const expected = meta.unique;
   const expectedRelErr = 0.1;
   const inputPath = path.resolve(__dirname, "input.txt");
 
@@ -38,10 +37,13 @@ async function main() {
   let wordCount = 0;
   const capacity = calculateCapacity(meta.total, expectedRelErr, 0.01);
   const cvm = new Estimator(capacity);
+  const set = new Set();
   for await (const word of getWords(inputPath)) {
     cvm.add(word);
+    set.add(word);
     ++wordCount;
   }
+  const expected = set.size;
   const actual = cvm.estimate();
   const actualRelErr = actual / expected - 1;
 
