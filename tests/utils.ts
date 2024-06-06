@@ -1,6 +1,14 @@
 import fs from "node:fs";
 import readline from "node:readline";
 
+export function genInt(
+  min: number,
+  max: number,
+  randomFn = Math.random,
+): number {
+  return Math.trunc(min + (max - min) * randomFn());
+}
+
 export async function* getWords(filePath: string): AsyncGenerator<string> {
   // Create the input stream
   const readStream = fs.createReadStream(filePath, { encoding: "utf-8" });
