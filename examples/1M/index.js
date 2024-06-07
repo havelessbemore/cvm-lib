@@ -5,12 +5,12 @@ function genInt(min, max, randomFn = Math.random) {
 }
 
 async function main() {
-  const expectedRelErr = 0.1;
+  const expectedRelErr = 0.05;
   const numVals = 1e6;
   const valMin = 1e7;
   const valMax = 1e8 - 1;
 
-  // Get estimate; expect 90% accuracy, with 99% confidence
+  // Get estimate; expect 95% accuracy, with 99% confidence
   const capacity = calculateCapacity(numVals, expectedRelErr, 0.01);
   const cvm = new Estimator(capacity);
   const set = new Set();

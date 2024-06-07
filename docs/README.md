@@ -61,9 +61,9 @@ node ./examples/hamlet/index.js
 ```
 
 - Total values: 1000000
-- CVM capacity: 2658
-- Expected uniques: 994422 ± 10.00%
-- Estimated uniques: 1003520 (0.91%)
+- CVM capacity: 10631
+- Expected uniques: 994384 ± 5.00%
+- Estimated uniques: 996480 (0.21%)
 
 ## API
 
