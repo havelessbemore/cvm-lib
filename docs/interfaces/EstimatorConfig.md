@@ -22,7 +22,7 @@ values give more accurate estimates.
 
 #### Source
 
-[estimatorConfig.ts:17](https://github.com/havelessbemore/cvm-lib/blob/307a44d0e3050891d1f15dc6539e99d2c5200467/src/estimatorConfig.ts#L17)
+[estimatorConfig.ts:17](https://github.com/havelessbemore/cvm-lib/blob/165ed4a583e8dee061c16fd4a7814bca66801ec0/src/estimatorConfig.ts#L17)
 
 ***
 
@@ -41,7 +41,7 @@ Otherwise, this may cause unintended behavior such as invalid estimates.
 
 #### Source
 
-[estimatorConfig.ts:25](https://github.com/havelessbemore/cvm-lib/blob/307a44d0e3050891d1f15dc6539e99d2c5200467/src/estimatorConfig.ts#L25)
+[estimatorConfig.ts:25](https://github.com/havelessbemore/cvm-lib/blob/165ed4a583e8dee061c16fd4a7814bca66801ec0/src/estimatorConfig.ts#L25)
 
 ***
 
@@ -62,4 +62,4 @@ may be invalidated.
 
 #### Source
 
-[estimatorConfig.ts:37](https://github.com/havelessbemore/cvm-lib/blob/307a44d0e3050891d1f15dc6539e99d2c5200467/src/estimatorConfig.ts#L37)
+[estimatorConfig.ts:37](https://github.com/havelessbemore/cvm-lib/blob/165ed4a583e8dee061c16fd4a7814bca66801ec0/src/estimatorConfig.ts#L37)
