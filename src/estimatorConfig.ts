@@ -2,11 +2,13 @@
 import { calculateCapacity } from "./capacity";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Estimator } from "./estimator";
+import type { Storage } from "./storage";
 
 /**
  * Configuration options for the {@link Estimator} class.
  */
-export interface EstimatorConfig {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface EstimatorConfig<T = any> {
   /**
    * The maximum number of samples in memory. Must be a positive integer.
    *
@@ -33,4 +35,10 @@ export interface EstimatorConfig {
    * may be invalidated.
    */
   sampleRate?: number;
+
+  /**
+   * (Optional) An instance of a custom data structure for storing samples.
+   * Must implement the {@link Storage} interface.
+   */
+  storage?: Storage<T>;
 }

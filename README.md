@@ -99,7 +99,7 @@ Estimates the number of distinct values in a set using the CVM algorithm.
 
 ### Interfaces
 
-#### `EstimatorConfig`
+#### `EstimatorConfig<T>`
 
 A configuration object used to create `Estimator` instances.
 
@@ -109,6 +109,17 @@ A configuration object used to create `Estimator` instances.
   - **Note:** Custom values may negatively affect accuracy. In general, the further from
     `0.5`, the more it's affected. If `capacity` was calculated via `calculateCapacity`,
     expected accuracy / confidence may be invalidated.
+- `storage` (optional): An object that implements `Storage` for storing samples.
+
+#### `Storage<T>`
+
+Represents a storage container for storing unique values of any type.
+
+- `size`: The number of values in storage. 
+- `add(value)`: Adds a value to storage.
+- `clear()`: Clears all values from storage.
+- `delete(value)`: Deletes a value from storage.
+- `[Symbol.iterator]()`: Iterates through stored values.
 
 ## Community and Support
 

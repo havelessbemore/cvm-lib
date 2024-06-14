@@ -1,7 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { calculateCapacity } from "./capacity";
-import { EstimatorConfig } from "./estimatorConfig";
+import type { EstimatorConfig } from "./estimatorConfig";
 import { isFraction, isPositiveInt } from "./is";
+import type { Storage } from "./storage";
 
 /**
  * Estimates the number of distinct values in a set using the CVM algorithm.
@@ -36,7 +37,7 @@ export class Estimator<T> {
   /**
    * The set of samples in memory.
    */
-  protected _samples: Set<T>;
+  protected _samples: Storage<T>;
 
   /**
    * @param capacity - The maximum number of samples in memory. Must be a positive integer.
@@ -50,28 +51,30 @@ export class Estimator<T> {
    * @defaultValue
    * - {@link randomFn} - `Math.random`.
    * - {@link sampleRate} - `0.5`.
+   * - {@link storage} - `new Set()`.
    *
    * @throws A {@link RangeError} if a given configuration is not within their expected range.
    */
-  constructor(config: EstimatorConfig);
-  constructor(config: number | EstimatorConfig) {
+  constructor(config: EstimatorConfig<T>);
+  constructor(config: number | EstimatorConfig<T>) {
     // Initialize with defaults
     this._capacity = 1;
     this._rate = 1;
     this._randomFn = Math.random;
     this._sampleRate = 0.5;
-    this._samples = new Set();
 
     // Apply capacity
     if (typeof config === "number") {
       this.capacity = config;
+      this._samples = new Set();
       return;
     }
 
     // Apply config object
     this.capacity = config.capacity;
-    config.sampleRate != null && (this.sampleRate = config.sampleRate);
     config.randomFn != null && (this.randomFn = config.randomFn);
+    config.sampleRate != null && (this.sampleRate = config.sampleRate);
+    this._samples = config.storage ?? new Set();
   }
 
   /**
