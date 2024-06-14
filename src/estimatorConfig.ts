@@ -25,9 +25,7 @@ export interface EstimatorConfig {
   randomFn?: () => number;
 
   /**
-   * (Optional) The sampling rate for managing samples.
-   *
-   * Must be between 0 and 1.
+   * (Optional) The sampling rate for managing samples. Must be between 0 and 1.
    *
    * @remarks Custom values may negatively affect accuracy. In general, the
    * further from `0.5`, the more it's affected. If {@link capacity} was
