@@ -36,6 +36,8 @@ export class Estimator<T> {
 
   /**
    * The set of samples in memory.
+   *
+   * @defaultValue `new Set<T>()`
    */
   protected _samples: SampleSet<T>;
 
@@ -47,11 +49,6 @@ export class Estimator<T> {
   constructor(capacity: number);
   /**
    * @param config - An {@link EstimatorConfig} configuration object.
-   *
-   * @defaultValue
-   * - {@link randomFn} - `Math.random`.
-   * - {@link sampleRate} - `0.5`.
-   * - {@link storage} - `new Set()`.
    *
    * @throws A {@link RangeError} if a given configuration is not within their expected range.
    */
