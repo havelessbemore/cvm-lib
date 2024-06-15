@@ -1,8 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { calculateCapacity } from "./capacity";
+import { calculateCapacity } from "../capacity";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Estimator } from "./estimator";
-import type { Storage } from "./storage";
+import { Estimator } from "../estimator";
+import type { SampleSet } from "./sampleSet";
 
 /**
  * Configuration options for the {@link Estimator} class.
@@ -37,8 +37,7 @@ export interface EstimatorConfig<T = any> {
   sampleRate?: number;
 
   /**
-   * (Optional) An instance of a custom data structure for storing samples.
-   * Must implement the {@link Storage} interface.
+   * (Optional) A custom {@link SampleSet} object for storing samples.
    */
-  storage?: Storage<T>;
+  storage?: SampleSet<T>;
 }

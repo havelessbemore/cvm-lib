@@ -83,14 +83,15 @@ class Estimator {
     this._rate = 1;
     this._randomFn = Math.random;
     this._sampleRate = 0.5;
-    this._samples = /* @__PURE__ */ new Set();
     if (typeof config === "number") {
       this.capacity = config;
+      this._samples = /* @__PURE__ */ new Set();
       return;
     }
     this.capacity = config.capacity;
-    config.sampleRate != null && (this.sampleRate = config.sampleRate);
     config.randomFn != null && (this.randomFn = config.randomFn);
+    config.sampleRate != null && (this.sampleRate = config.sampleRate);
+    this._samples = config.storage ?? /* @__PURE__ */ new Set();
   }
   /**
    * Gets capacity.

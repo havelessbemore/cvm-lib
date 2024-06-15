@@ -1,7 +1,46 @@
 /**
+ * Represents a generic set for storing samples.
+ */
+interface SampleSet<T> {
+    /**
+     * Gets the number of values in the set.
+     *
+     * @readonly
+     */
+    readonly size: number;
+    /**
+     * Adds a value to the set.
+     *
+     * @param value - The value to add.
+     *
+     * @returns The set instance.
+     */
+    add(value: T): this;
+    /**
+     * Clears all values from the set.
+     */
+    clear(): void;
+    /**
+     * Removes a specified value from the set.
+     *
+     * @param value - The value to remove.
+     *
+     * @returns `true` if a value existed in the set and has been removed, `false` otherwise.
+     */
+    delete(value: T): boolean;
+    /**
+     * Iterates through the set's values.
+     *
+     * Iteration order is determined by the implementation
+     * (e.g., insertion order, sorted, random, etc.).
+     */
+    [Symbol.iterator](): Iterator<T>;
+}
+
+/**
  * Configuration options for the {@link Estimator} class.
  */
-interface EstimatorConfig {
+interface EstimatorConfig<T = any> {
     /**
      * The maximum number of samples in memory. Must be a positive integer.
      *
@@ -18,9 +57,7 @@ interface EstimatorConfig {
      */
     randomFn?: () => number;
     /**
-     * (Optional) The sampling rate for managing samples.
-     *
-     * Must be between 0 and 1.
+     * (Optional) The sampling rate for managing samples. Must be between 0 and 1.
      *
      * @remarks Custom values may negatively affect accuracy. In general, the
      * further from `0.5`, the more it's affected. If {@link capacity} was
@@ -28,6 +65,10 @@ interface EstimatorConfig {
      * may be invalidated.
      */
     sampleRate?: number;
+    /**
+     * (Optional) A custom {@link SampleSet} object for storing samples.
+     */
+    storage?: SampleSet<T>;
 }
 
 /**
@@ -125,7 +166,7 @@ declare class Estimator<T> {
     /**
      * The set of samples in memory.
      */
-    protected _samples: Set<T>;
+    protected _samples: SampleSet<T>;
     /**
      * @param capacity - The maximum number of samples in memory. Must be a positive integer.
      *
@@ -138,10 +179,11 @@ declare class Estimator<T> {
      * @defaultValue
      * - {@link randomFn} - `Math.random`.
      * - {@link sampleRate} - `0.5`.
+     * - {@link storage} - `new Set()`.
      *
      * @throws A {@link RangeError} if a given configuration is not within their expected range.
      */
-    constructor(config: EstimatorConfig);
+    constructor(config: EstimatorConfig<T>);
     /**
      * Gets capacity.
      */
@@ -212,4 +254,4 @@ declare class Estimator<T> {
     estimate(): number;
 }
 
-export { Estimator, type EstimatorConfig, calculateCapacity };
+export { Estimator, type EstimatorConfig, type SampleSet, calculateCapacity };

@@ -1,9 +1,91 @@
 import { describe, expect, jest, test } from "@jest/globals";
 
 import { Estimator } from "./estimator";
-import { EstimatorConfig } from "./estimatorConfig";
+import type { EstimatorConfig } from "./types/estimatorConfig";
+import type { SampleSet } from "./types/sampleSet";
+
+class CustomSet<T> implements SampleSet<T> {
+  private items: Set<T> = new Set<T>();
+
+  get size(): number {
+    return this.items.size;
+  }
+
+  add(value: T): this {
+    this.items.add(value);
+    return this;
+  }
+
+  clear(): void {
+    this.items.clear();
+  }
+
+  delete(value: T): boolean {
+    return this.items.delete(value);
+  }
+
+  [Symbol.iterator](): Iterator<T> {
+    return this.items[Symbol.iterator]();
+  }
+}
 
 describe(`${Estimator.name}`, () => {
+  describe("constructor", () => {
+    test("should initialize with a given capacity", () => {
+      const cvm = new Estimator(10);
+      expect(cvm.capacity).toBe(10);
+      expect(cvm.size).toBe(0);
+    });
+
+    test("should initialize with a config object", () => {
+      const config: EstimatorConfig = { capacity: 15 };
+      const cvm = new Estimator(config);
+      expect(cvm.capacity).toBe(15);
+      expect(cvm.size).toBe(0);
+    });
+
+    test("should use custom random function", () => {
+      const customRandom = jest.fn<() => number>().mockReturnValue(0.3);
+      const config: EstimatorConfig = { capacity: 20, randomFn: customRandom };
+      const cvm = new Estimator(config);
+      expect(cvm.randomFn()).toBe(0.3);
+      expect(customRandom).toHaveBeenCalled();
+    });
+
+    test("should use custom sample rate", () => {
+      const config: EstimatorConfig = { capacity: 20, sampleRate: 0.7 };
+      const cvm = new Estimator(config);
+      expect(cvm.sampleRate).toBe(0.7);
+    });
+
+    test("should use custom storage", () => {
+      const customStorage = new CustomSet<number>();
+      const config: EstimatorConfig<number> = {
+        capacity: 20,
+        storage: customStorage,
+      };
+      const cvm = new Estimator(config);
+      expect(cvm.size).toBe(0);
+      cvm.add(5);
+      expect(cvm.size).toBe(1);
+      expect([...customStorage]).toContain(5);
+    });
+
+    test("should throw error for invalid capacity", () => {
+      expect(() => new Estimator(0)).toThrow(RangeError);
+      expect(() => new Estimator(-5)).toThrow(RangeError);
+    });
+
+    test("should throw error for invalid sample rate", () => {
+      expect(() => new Estimator({ capacity: 10, sampleRate: 1.5 })).toThrow(
+        RangeError,
+      );
+      expect(() => new Estimator({ capacity: 10, sampleRate: -0.5 })).toThrow(
+        RangeError,
+      );
+    });
+  });
+
   describe(`.capacity`, () => {
     test("should return the correct capacity when initialized", () => {
       const cvm = new Estimator<number>(10);

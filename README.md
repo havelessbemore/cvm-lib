@@ -109,17 +109,17 @@ A configuration object used to create `Estimator` instances.
   - **Note:** Custom values may negatively affect accuracy. In general, the further from
     `0.5`, the more it's affected. If `capacity` was calculated via `calculateCapacity`,
     expected accuracy / confidence may be invalidated.
-- `storage` (optional): An object that implements `Storage` for storing samples.
+- `storage` (optional): An object that implements `SampleSet` for storing samples.
 
-#### `Storage<T>`
+#### `SampleSet<T>`
 
-Represents a storage container for storing unique values of any type.
+Represents a generic set for storing samples.
 
-- `size`: The number of values in storage. 
-- `add(value)`: Adds a value to storage.
-- `clear()`: Clears all values from storage.
-- `delete(value)`: Deletes a value from storage.
-- `[Symbol.iterator]()`: Iterates through stored values.
+- `size`: The number of values in the set.
+- `add(value)`: Adds a value to the set.
+- `clear()`: Clears all values from the set.
+- `delete(value)`: Removes a specified value from the set.
+- `[Symbol.iterator]()`: Iterates through the set's values.
 
 ## Community and Support
 

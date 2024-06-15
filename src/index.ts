@@ -1,6 +1,9 @@
-export { type EstimatorConfig } from "./estimatorConfig";
-export { type Storage } from "./storage";
+// Types
+export type { EstimatorConfig } from "./types/estimatorConfig";
+export type { SampleSet } from "./types/sampleSet";
 
+// Functions
 export { calculateCapacity } from "./capacity";
 
+// Classes
 export { Estimator } from "./estimator";

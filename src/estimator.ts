@@ -1,8 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { calculateCapacity } from "./capacity";
-import type { EstimatorConfig } from "./estimatorConfig";
+import type { EstimatorConfig } from "./types/estimatorConfig";
 import { isFraction, isPositiveInt } from "./is";
-import type { Storage } from "./storage";
+import type { SampleSet } from "./types/sampleSet";
 
 /**
  * Estimates the number of distinct values in a set using the CVM algorithm.
@@ -37,7 +37,7 @@ export class Estimator<T> {
   /**
    * The set of samples in memory.
    */
-  protected _samples: Storage<T>;
+  protected _samples: SampleSet<T>;
 
   /**
    * @param capacity - The maximum number of samples in memory. Must be a positive integer.
