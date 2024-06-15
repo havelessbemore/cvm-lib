@@ -33,10 +33,8 @@ export interface SampleSet<T> {
   delete(value: T): boolean;
 
   /**
-   * Iterates through the set's values.
-   *
-   * Iteration order is determined by the implementation
-   * (e.g., insertion order, sorted, random, etc.).
+   * @returns an {@link Iterator} over the values in the set. The values are returned
+   * in no particular order unless a guarantee is given by the implementing class.
    */
   [Symbol.iterator](): Iterator<T>;
 }
