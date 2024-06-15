@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.1.0](https://github.com/havelessbemore/munkres/compare/v0.0.5...v0.1.0) (2024-06-14)
+
+### What's New
+
+- Adds the [SampleSet](./src/types/sampleSet.ts) interface.
+- Adds an optional `storage` property in [EstimatorConfig](./src/types/estimatorConfig.ts) to enable providing a custom object for storing samples.
+
 ## [0.0.5](https://github.com/havelessbemore/munkres/compare/v0.0.4...v0.0.5) (2024-06-07)
 
 ### What's Changed
