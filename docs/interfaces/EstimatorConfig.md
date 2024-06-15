@@ -4,9 +4,13 @@
 
 [cvm-lib](../globals.md) / EstimatorConfig
 
-# Interface: EstimatorConfig
+# Interface: EstimatorConfig\<T\>
 
 Configuration options for the [Estimator](../classes/Estimator.md) class.
+
+## Type parameters
+
+• **T** = `any`
 
 ## Properties
 
@@ -22,7 +26,7 @@ values give more accurate estimates.
 
 #### Source
 
-[estimatorConfig.ts:17](https://github.com/havelessbemore/cvm-lib/blob/165ed4a583e8dee061c16fd4a7814bca66801ec0/src/estimatorConfig.ts#L17)
+[types/estimatorConfig.ts:19](https://github.com/havelessbemore/cvm-lib/blob/2465ae09255314578d4663dca2eceb7df4f93bf2/src/types/estimatorConfig.ts#L19)
 
 ***
 
@@ -41,7 +45,7 @@ Otherwise, this may cause unintended behavior such as invalid estimates.
 
 #### Source
 
-[estimatorConfig.ts:25](https://github.com/havelessbemore/cvm-lib/blob/165ed4a583e8dee061c16fd4a7814bca66801ec0/src/estimatorConfig.ts#L25)
+[types/estimatorConfig.ts:27](https://github.com/havelessbemore/cvm-lib/blob/2465ae09255314578d4663dca2eceb7df4f93bf2/src/types/estimatorConfig.ts#L27)
 
 ***
 
@@ -49,9 +53,7 @@ Otherwise, this may cause unintended behavior such as invalid estimates.
 
 > `optional` **sampleRate**: `number`
 
-(Optional) The sampling rate for managing samples.
-
-Must be between 0 and 1.
+(Optional) The sampling rate for managing samples. Must be between 0 and 1.
 
 #### Remarks
 
@@ -62,4 +64,16 @@ may be invalidated.
 
 #### Source
 
-[estimatorConfig.ts:37](https://github.com/havelessbemore/cvm-lib/blob/165ed4a583e8dee061c16fd4a7814bca66801ec0/src/estimatorConfig.ts#L37)
+[types/estimatorConfig.ts:37](https://github.com/havelessbemore/cvm-lib/blob/2465ae09255314578d4663dca2eceb7df4f93bf2/src/types/estimatorConfig.ts#L37)
+
+***
+
+### storage?
+
+> `optional` **storage**: [`SampleSet`](SampleSet.md)\<`T`\>
+
+(Optional) A custom [SampleSet](SampleSet.md) object for storing samples.
+
+#### Source
+
+[types/estimatorConfig.ts:42](https://github.com/havelessbemore/cvm-lib/blob/2465ae09255314578d4663dca2eceb7df4f93bf2/src/types/estimatorConfig.ts#L42)

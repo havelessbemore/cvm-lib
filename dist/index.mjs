@@ -77,6 +77,8 @@ class Estimator {
     __publicField(this, "_sampleRate");
     /**
      * The set of samples in memory.
+     *
+     * @defaultValue `new Set<T>()`
      */
     __publicField(this, "_samples");
     this._capacity = 1;

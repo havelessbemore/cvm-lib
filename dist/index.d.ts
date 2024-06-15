@@ -29,10 +29,8 @@ interface SampleSet<T> {
      */
     delete(value: T): boolean;
     /**
-     * Iterates through the set's values.
-     *
-     * Iteration order is determined by the implementation
-     * (e.g., insertion order, sorted, random, etc.).
+     * @returns an {@link Iterator} over the values in the set. The values are returned
+     * in no particular order unless a guarantee is given by the implementing class.
      */
     [Symbol.iterator](): Iterator<T>;
 }
@@ -165,6 +163,8 @@ declare class Estimator<T> {
     protected _sampleRate: number;
     /**
      * The set of samples in memory.
+     *
+     * @defaultValue `new Set<T>()`
      */
     protected _samples: SampleSet<T>;
     /**
@@ -175,11 +175,6 @@ declare class Estimator<T> {
     constructor(capacity: number);
     /**
      * @param config - An {@link EstimatorConfig} configuration object.
-     *
-     * @defaultValue
-     * - {@link randomFn} - `Math.random`.
-     * - {@link sampleRate} - `0.5`.
-     * - {@link storage} - `new Set()`.
      *
      * @throws A {@link RangeError} if a given configuration is not within their expected range.
      */

@@ -11,6 +11,7 @@
 ## Interfaces
 
 - [EstimatorConfig](interfaces/EstimatorConfig.md)
+- [SampleSet](interfaces/SampleSet.md)
 
 ## Functions
 
