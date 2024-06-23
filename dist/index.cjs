@@ -209,4 +209,4 @@ class Estimator {
 
 exports.Estimator = Estimator;
 exports.calculateCapacity = calculateCapacity;
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=index.cjs.map
