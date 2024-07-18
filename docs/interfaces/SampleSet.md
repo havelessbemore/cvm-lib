@@ -8,7 +8,7 @@
 
 Represents a generic set for storing samples.
 
-## Type parameters
+## Type Parameters
 
 • **T**
 
@@ -20,13 +20,13 @@ Represents a generic set for storing samples.
 
 Gets the number of values in the set.
 
-#### Source
+#### Defined in
 
-[types/sampleSet.ts:10](https://github.com/havelessbemore/cvm-lib/blob/0eaad43a6006e88785180a8943152a85322fdacc/src/types/sampleSet.ts#L10)
+[types/sampleSet.ts:10](https://github.com/havelessbemore/cvm-lib/blob/66ab91527c3815ced02139bd9f68aa6c1e6371ba/src/types/sampleSet.ts#L10)
 
 ## Methods
 
-### `[iterator]`()
+### \[iterator\]()
 
 > **\[iterator\]**(): `Iterator`\<`T`, `any`, `undefined`\>
 
@@ -37,9 +37,9 @@ Gets the number of values in the set.
 an Iterator over the values in the set. The values are returned
 in no particular order unless a guarantee is given by the implementing class.
 
-#### Source
+#### Defined in
 
-[types/sampleSet.ts:39](https://github.com/havelessbemore/cvm-lib/blob/0eaad43a6006e88785180a8943152a85322fdacc/src/types/sampleSet.ts#L39)
+[types/sampleSet.ts:39](https://github.com/havelessbemore/cvm-lib/blob/66ab91527c3815ced02139bd9f68aa6c1e6371ba/src/types/sampleSet.ts#L39)
 
 ***
 
@@ -61,9 +61,9 @@ The value to add.
 
 The set instance.
 
-#### Source
+#### Defined in
 
-[types/sampleSet.ts:19](https://github.com/havelessbemore/cvm-lib/blob/0eaad43a6006e88785180a8943152a85322fdacc/src/types/sampleSet.ts#L19)
+[types/sampleSet.ts:19](https://github.com/havelessbemore/cvm-lib/blob/66ab91527c3815ced02139bd9f68aa6c1e6371ba/src/types/sampleSet.ts#L19)
 
 ***
 
@@ -77,9 +77,9 @@ Clears all values from the set.
 
 `void`
 
-#### Source
+#### Defined in
 
-[types/sampleSet.ts:24](https://github.com/havelessbemore/cvm-lib/blob/0eaad43a6006e88785180a8943152a85322fdacc/src/types/sampleSet.ts#L24)
+[types/sampleSet.ts:24](https://github.com/havelessbemore/cvm-lib/blob/66ab91527c3815ced02139bd9f68aa6c1e6371ba/src/types/sampleSet.ts#L24)
 
 ***
 
@@ -101,6 +101,6 @@ The value to remove.
 
 `true` if a value existed in the set and has been removed, `false` otherwise.
 
-#### Source
+#### Defined in
 
-[types/sampleSet.ts:33](https://github.com/havelessbemore/cvm-lib/blob/0eaad43a6006e88785180a8943152a85322fdacc/src/types/sampleSet.ts#L33)
+[types/sampleSet.ts:33](https://github.com/havelessbemore/cvm-lib/blob/66ab91527c3815ced02139bd9f68aa6c1e6371ba/src/types/sampleSet.ts#L33)

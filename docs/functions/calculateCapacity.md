@@ -20,7 +20,7 @@ The total number of values in the set, or an estimate if unknown.
 - Must be a positive number.
 - If unknown, an overestimate is better, but requires more space.
 
-• **epsilon**: `number`= `0.05`
+• **epsilon**: `number` = `0.05`
 
 An estimate's relative error. Controls accuracy.
 
@@ -28,7 +28,7 @@ An estimate's relative error. Controls accuracy.
 - Smaller values equal more accuracy but more required space.
 - Defaults to `0.05` (i.e. 95% accuracy; estimates can range within ±5% of the true value).
 
-• **delta**: `number`= `0.01`
+• **delta**: `number` = `0.01`
 
 The probability an estimate is not accurate. Controls confidence.
 
@@ -83,6 +83,6 @@ A RangeError for any of the following:
  const capacity = calculateCapacity(1e9, 0.01, 0.00001); // 465,070
 ```
 
-## Source
+## Defined in
 
-[capacity.ts:67](https://github.com/havelessbemore/cvm-lib/blob/0eaad43a6006e88785180a8943152a85322fdacc/src/capacity.ts#L67)
+[capacity.ts:67](https://github.com/havelessbemore/cvm-lib/blob/66ab91527c3815ced02139bd9f68aa6c1e6371ba/src/capacity.ts#L67)

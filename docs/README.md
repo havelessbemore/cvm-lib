@@ -137,7 +137,7 @@ Contributions are welcome!
 
 - **Pull Requests**: Please ensure your code adheres to the existing style of the project and include any necessary tests and documentation.
 
-For more information, check out the [contributor's guide](./CONTRIBUTING.md).
+For more information, check out the [contributor's guide](_media/CONTRIBUTING.md).
 
 ## Build
 

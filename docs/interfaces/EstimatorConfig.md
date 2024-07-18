@@ -8,7 +8,7 @@
 
 Configuration options for the [Estimator](../classes/Estimator.md) class.
 
-## Type parameters
+## Type Parameters
 
 • **T** = `any`
 
@@ -24,9 +24,9 @@ This should be calculated via [calculateCapacity](../functions/calculateCapacity
 can also be set arbitrarily. In general, larger
 values give more accurate estimates.
 
-#### Source
+#### Defined in
 
-[types/estimatorConfig.ts:19](https://github.com/havelessbemore/cvm-lib/blob/0eaad43a6006e88785180a8943152a85322fdacc/src/types/estimatorConfig.ts#L19)
+[types/estimatorConfig.ts:19](https://github.com/havelessbemore/cvm-lib/blob/66ab91527c3815ced02139bd9f68aa6c1e6371ba/src/types/estimatorConfig.ts#L19)
 
 ***
 
@@ -43,9 +43,9 @@ Otherwise, this may cause unintended behavior such as invalid estimates.
 
 `number`
 
-#### Source
+#### Defined in
 
-[types/estimatorConfig.ts:27](https://github.com/havelessbemore/cvm-lib/blob/0eaad43a6006e88785180a8943152a85322fdacc/src/types/estimatorConfig.ts#L27)
+[types/estimatorConfig.ts:27](https://github.com/havelessbemore/cvm-lib/blob/66ab91527c3815ced02139bd9f68aa6c1e6371ba/src/types/estimatorConfig.ts#L27)
 
 ***
 
@@ -62,9 +62,9 @@ further from `0.5`, the more it's affected. If [capacity](EstimatorConfig.md#cap
 calculated via [calculateCapacity](../functions/calculateCapacity.md), expected accuracy / confidence
 may be invalidated.
 
-#### Source
+#### Defined in
 
-[types/estimatorConfig.ts:37](https://github.com/havelessbemore/cvm-lib/blob/0eaad43a6006e88785180a8943152a85322fdacc/src/types/estimatorConfig.ts#L37)
+[types/estimatorConfig.ts:37](https://github.com/havelessbemore/cvm-lib/blob/66ab91527c3815ced02139bd9f68aa6c1e6371ba/src/types/estimatorConfig.ts#L37)
 
 ***
 
@@ -74,6 +74,6 @@ may be invalidated.
 
 (Optional) A custom [SampleSet](SampleSet.md) object for storing samples.
 
-#### Source
+#### Defined in
 
-[types/estimatorConfig.ts:42](https://github.com/havelessbemore/cvm-lib/blob/0eaad43a6006e88785180a8943152a85322fdacc/src/types/estimatorConfig.ts#L42)
+[types/estimatorConfig.ts:42](https://github.com/havelessbemore/cvm-lib/blob/66ab91527c3815ced02139bd9f68aa6c1e6371ba/src/types/estimatorConfig.ts#L42)
