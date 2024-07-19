@@ -33,7 +33,7 @@
   ],
   "scripts": {
     "build": "rimraf dist && tsc && rollup -c",
-    "build:docs": "typedoc",
+    "build:docs": "rimraf docs && typedoc",
     "format": "prettier . --write",
     "lint": "eslint .",
     "prepare": "husky",

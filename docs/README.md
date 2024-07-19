@@ -37,7 +37,7 @@ jsr add @rojas/cvm
 
 ## Examples
 
-See the [examples/](./examples/) directory for all examples.
+See the [examples/](examples/) directory for all examples.
 
 ### Hamlet
 
