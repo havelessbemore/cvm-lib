@@ -69,8 +69,8 @@ export class Estimator<T> {
 
     // Apply config object
     this.capacity = config.capacity;
-    config.randomFn != null && (this.randomFn = config.randomFn);
-    config.sampleRate != null && (this.sampleRate = config.sampleRate);
+    this.randomFn = config.randomFn ?? this._randomFn;
+    this.sampleRate = config.sampleRate ?? this._sampleRate;
     this._samples = config.storage ?? new Set();
   }
 
