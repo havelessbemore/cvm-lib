@@ -26,7 +26,7 @@ values give more accurate estimates.
 
 #### Defined in
 
-[types/estimatorConfig.ts:19](https://github.com/havelessbemore/cvm-lib/blob/8d8134354aabe600242d0266b55f343c32824634/src/types/estimatorConfig.ts#L19)
+[types/estimatorConfig.ts:19](https://github.com/havelessbemore/cvm-lib/blob/fa7b5c0972ff5c64dd631d366ee95010a666bf22/src/types/estimatorConfig.ts#L19)
 
 ***
 
@@ -45,7 +45,7 @@ Otherwise, this may cause unintended behavior such as invalid estimates.
 
 #### Defined in
 
-[types/estimatorConfig.ts:27](https://github.com/havelessbemore/cvm-lib/blob/8d8134354aabe600242d0266b55f343c32824634/src/types/estimatorConfig.ts#L27)
+[types/estimatorConfig.ts:27](https://github.com/havelessbemore/cvm-lib/blob/fa7b5c0972ff5c64dd631d366ee95010a666bf22/src/types/estimatorConfig.ts#L27)
 
 ***
 
@@ -64,7 +64,7 @@ may be invalidated.
 
 #### Defined in
 
-[types/estimatorConfig.ts:37](https://github.com/havelessbemore/cvm-lib/blob/8d8134354aabe600242d0266b55f343c32824634/src/types/estimatorConfig.ts#L37)
+[types/estimatorConfig.ts:37](https://github.com/havelessbemore/cvm-lib/blob/fa7b5c0972ff5c64dd631d366ee95010a666bf22/src/types/estimatorConfig.ts#L37)
 
 ***
 
@@ -76,4 +76,4 @@ may be invalidated.
 
 #### Defined in
 
-[types/estimatorConfig.ts:42](https://github.com/havelessbemore/cvm-lib/blob/8d8134354aabe600242d0266b55f343c32824634/src/types/estimatorConfig.ts#L42)
+[types/estimatorConfig.ts:42](https://github.com/havelessbemore/cvm-lib/blob/fa7b5c0972ff5c64dd631d366ee95010a666bf22/src/types/estimatorConfig.ts#L42)
