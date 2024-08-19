@@ -22,7 +22,7 @@ Gets the number of values in the set.
 
 #### Defined in
 
-[types/sampleSet.ts:10](https://github.com/havelessbemore/cvm-lib/blob/fa7b5c0972ff5c64dd631d366ee95010a666bf22/src/types/sampleSet.ts#L10)
+[types/sampleSet.ts:10](https://github.com/havelessbemore/cvm-lib/blob/d0e42e507693783738e61204cf1d8fd9eaa485bc/src/types/sampleSet.ts#L10)
 
 ## Methods
 
@@ -39,7 +39,7 @@ in no particular order unless a guarantee is given by the implementing class.
 
 #### Defined in
 
-[types/sampleSet.ts:39](https://github.com/havelessbemore/cvm-lib/blob/fa7b5c0972ff5c64dd631d366ee95010a666bf22/src/types/sampleSet.ts#L39)
+[types/sampleSet.ts:39](https://github.com/havelessbemore/cvm-lib/blob/d0e42e507693783738e61204cf1d8fd9eaa485bc/src/types/sampleSet.ts#L39)
 
 ***
 
@@ -63,7 +63,7 @@ The set instance.
 
 #### Defined in
 
-[types/sampleSet.ts:19](https://github.com/havelessbemore/cvm-lib/blob/fa7b5c0972ff5c64dd631d366ee95010a666bf22/src/types/sampleSet.ts#L19)
+[types/sampleSet.ts:19](https://github.com/havelessbemore/cvm-lib/blob/d0e42e507693783738e61204cf1d8fd9eaa485bc/src/types/sampleSet.ts#L19)
 
 ***
 
@@ -79,7 +79,7 @@ Clears all values from the set.
 
 #### Defined in
 
-[types/sampleSet.ts:24](https://github.com/havelessbemore/cvm-lib/blob/fa7b5c0972ff5c64dd631d366ee95010a666bf22/src/types/sampleSet.ts#L24)
+[types/sampleSet.ts:24](https://github.com/havelessbemore/cvm-lib/blob/d0e42e507693783738e61204cf1d8fd9eaa485bc/src/types/sampleSet.ts#L24)
 
 ***
 
@@ -103,4 +103,4 @@ The value to remove.
 
 #### Defined in
 
-[types/sampleSet.ts:33](https://github.com/havelessbemore/cvm-lib/blob/fa7b5c0972ff5c64dd631d366ee95010a666bf22/src/types/sampleSet.ts#L33)
+[types/sampleSet.ts:33](https://github.com/havelessbemore/cvm-lib/blob/d0e42e507693783738e61204cf1d8fd9eaa485bc/src/types/sampleSet.ts#L33)
