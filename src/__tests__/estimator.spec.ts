@@ -1,8 +1,6 @@
-import { describe, expect, jest, test } from "@jest/globals";
-
-import { Estimator } from "./estimator";
-import type { EstimatorConfig } from "./types/estimatorConfig";
-import type { SampleSet } from "./types/sampleSet";
+import { Estimator } from "../estimator";
+import type { EstimatorConfig } from "../types/estimatorConfig";
+import type { SampleSet } from "../types/sampleSet";
 
 class CustomSet<T> implements SampleSet<T> {
   private items: Set<T> = new Set<T>();
@@ -45,7 +43,7 @@ describe(`${Estimator.name}`, () => {
     });
 
     test("should use custom random function", () => {
-      const customRandom = jest.fn<() => number>().mockReturnValue(0.3);
+      const customRandom = jest.fn().mockReturnValue(0.3);
       const config: EstimatorConfig = { capacity: 20, randomFn: customRandom };
       const cvm = new Estimator(config);
       expect(cvm.randomFn()).toBe(0.3);
@@ -202,7 +200,7 @@ describe(`${Estimator.name}`, () => {
     });
 
     test("should use the custom random function for sampling", () => {
-      const mockRandomFn = jest.fn<() => number>().mockReturnValue(0.1);
+      const mockRandomFn = jest.fn().mockReturnValue(0.1);
       const config: EstimatorConfig = {
         capacity: 10,
         sampleRate: 0.5,
@@ -268,7 +266,7 @@ describe(`${Estimator.name}`, () => {
 
     test("should correctly update size after hitting capacity and adjusting sample rate", () => {
       const mockRandomFn = jest
-        .fn<() => number>()
+        .fn()
         .mockReturnValueOnce(0.1) // Add 1
         .mockReturnValueOnce(0.2) // Add 2
         .mockReturnValueOnce(0.3) // Add 3 (triggers reduction)
@@ -298,7 +296,7 @@ describe(`${Estimator.name}`, () => {
     });
 
     test("should not add an element if the random function exceeds the sample rate", () => {
-      const mockRandomFn = jest.fn<() => number>().mockReturnValue(1.1);
+      const mockRandomFn = jest.fn().mockReturnValue(1.1);
       const config = { capacity: 10, sampleRate: 0.5, randomFn: mockRandomFn };
       const cvm = new Estimator<number>(config);
 
@@ -307,7 +305,7 @@ describe(`${Estimator.name}`, () => {
     });
 
     test("should handle adding elements after capacity is reached", () => {
-      const mockRandomFn = jest.fn<() => number>().mockReturnValue(0.9);
+      const mockRandomFn = jest.fn().mockReturnValue(0.9);
       const config = { capacity: 3, sampleRate: 0.5, randomFn: mockRandomFn };
       const cvm = new Estimator<number>(config);
       cvm.add(1);
@@ -319,7 +317,7 @@ describe(`${Estimator.name}`, () => {
 
     test("should adjust sample rate and reduce sample size when capacity is exceeded", () => {
       const mockRandomFn = jest
-        .fn<() => number>()
+        .fn()
         .mockReturnValueOnce(0.1) // Add 1
         .mockReturnValueOnce(0.2) // Add 2
         .mockReturnValueOnce(0.1) // Add 3
@@ -352,7 +350,7 @@ describe(`${Estimator.name}`, () => {
 
     test("should remove elements not sampled", () => {
       const mockRandomFn = jest
-        .fn<() => number>()
+        .fn()
         .mockReturnValueOnce(0.1)
         .mockReturnValueOnce(0.1)
         .mockReturnValueOnce(0.1)

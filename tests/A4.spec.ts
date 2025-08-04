@@ -1,5 +1,3 @@
-import { describe, it, expect } from "@jest/globals";
-
 import { calculateCapacity, Estimator } from "../src";
 import { genInt } from "./utils";
 

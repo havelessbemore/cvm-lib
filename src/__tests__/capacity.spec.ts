@@ -1,6 +1,4 @@
-import { describe, it, expect } from "@jest/globals";
-
-import { calculateCapacity } from "./capacity";
+import { calculateCapacity } from "../capacity";
 
 describe(`${calculateCapacity}()`, () => {
   it("should calculate the required capacity with default accuracy and confidence", () => {

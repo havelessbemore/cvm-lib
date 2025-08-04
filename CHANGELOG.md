@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.1.2](https://github.com/havelessbemore/cvm-lib/compare/v0.1.1...v0.1.2) (2025-08-03)
+
+- Update the build process
+- Update dev dependencies
+
 ## [0.1.1](https://github.com/havelessbemore/cvm-lib/compare/v0.1.0...v0.1.1) (2024-06-23)
 
 - Update the CommonJS build file's extension from `.js` to `.cjs`

@@ -1,4 +1,4 @@
-[**cvm-lib**](README.md) • **Docs**
+[**cvm-lib**](README.md)
 
 ***
 

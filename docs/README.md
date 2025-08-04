@@ -1,4 +1,4 @@
-**cvm-lib** • [**Docs**](globals.md)
+**cvm-lib**
 
 ***
 
@@ -37,7 +37,7 @@ jsr add @rojas/cvm
 
 ## Examples
 
-See the [examples/](./examples/) directory for all examples.
+See the [examples/](_media/examples) directory for all examples.
 
 ### Hamlet
 

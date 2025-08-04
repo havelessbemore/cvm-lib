@@ -1,4 +1,6 @@
 name: Coverage Workflow
+permissions:
+  contents: read
 on:
   pull_request:
     branches: [main]
@@ -15,13 +17,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-          node-version: 20
+          node-version: 24
       - name: Clean install
         run: npm ci
       - name: Run tests and collect coverage
         run: npm run test:coverage
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4.0.1
+        if: ${{ !cancelled() }}
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: havelessbemore/cvm-lib
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          

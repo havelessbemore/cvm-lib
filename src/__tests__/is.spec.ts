@@ -1,7 +1,5 @@
 /* eslint-disable no-loss-of-precision */
-import { describe, it, expect } from "@jest/globals";
-
-import { isFraction, isPositive, isPositiveInt } from "./is";
+import { isFraction, isPositive, isPositiveInt } from "../is";
 
 describe(`${isFraction}()`, () => {
   it("should return true if within (0, 1)", () => {

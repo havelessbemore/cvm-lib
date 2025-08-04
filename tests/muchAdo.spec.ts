@@ -1,15 +1,8 @@
-import { createRequire } from "node:module";
 import path from "node:path";
-import url from "node:url";
 
-import { describe, it, expect } from "@jest/globals";
-
+import meta from "../examples/muchAdo/meta.json";
 import { calculateCapacity, Estimator } from "../src";
 import { getWords } from "./utils";
-
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const meta = createRequire(__filename)("../examples/muchAdo/meta.json");
 
 describe(`Much Ado About Nothing`, () => {
   it("Should accurately estimate distinct words", async () => {

@@ -1,6 +1,8 @@
 # This workflow will do a clean installation of node dependencies, build the source code and run tests across different node versions
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 name: Node.js CI
+permissions:
+  contents: read
 on:
   pull_request:
     branches: [main]
@@ -14,7 +16,7 @@ jobs:
     strategy:
       matrix:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-        node: [18, 20, 22]
+        node: [18.6, 20, 22, 24]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

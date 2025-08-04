@@ -1,12 +1,13 @@
 {
   "$schema": "https://jsr.io/schema/config-file.v1.json",
   "name": "@rojas/cvm",
-  "version": "0.1.1",
+  "version": "0.1.2",
+  "license": "MIT",
   "exports": {
     ".": "./src/index.ts"
   },
   "publish": {
     "include": ["LICENSE", "README.md", "src"],
-    "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
+    "exclude": ["src/**/*.spec.ts"]
   }
 }

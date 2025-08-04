@@ -1,4 +1,4 @@
-[**cvm-lib**](../README.md) • **Docs**
+[**cvm-lib**](../README.md)
 
 ***
 
@@ -8,19 +8,25 @@
 
 > **calculateCapacity**(`n`, `epsilon`, `delta`): `number`
 
+Defined in: [capacity.ts:67](https://github.com/havelessbemore/cvm-lib/blob/9b271107ec7b8bf4b4e48d441a8edb9ea15658be/src/capacity.ts#L67)
+
 Calculates the space required to estimate the number of
 distinct values in a set with a given accuracy and confidence.
 
 ## Parameters
 
-• **n**: `number`
+### n
+
+`number`
 
 The total number of values in the set, or an estimate if unknown.
 
 - Must be a positive number.
 - If unknown, an overestimate is better, but requires more space.
 
-• **epsilon**: `number` = `0.05`
+### epsilon
+
+`number` = `0.05`
 
 An estimate's relative error. Controls accuracy.
 
@@ -28,7 +34,9 @@ An estimate's relative error. Controls accuracy.
 - Smaller values equal more accuracy but more required space.
 - Defaults to `0.05` (i.e. 95% accuracy; estimates can range within ±5% of the true value).
 
-• **delta**: `number` = `0.01`
+### delta
+
+`number` = `0.01`
 
 The probability an estimate is not accurate. Controls confidence.
 
@@ -44,7 +52,7 @@ The calculated capacity.
 
 ## Throws
 
-A RangeError for any of the following:
+A [RangeError](#) for any of the following:
 - `n` is not a positive number.
 - `epsilon` is not between 0 and 1.
 - `delta` is not between 0 and 1.
@@ -82,7 +90,3 @@ A RangeError for any of the following:
  // being within ±1% of the actual number.
  const capacity = calculateCapacity(1e9, 0.01, 0.00001); // 465,070
 ```
-
-## Defined in
-
-[capacity.ts:67](https://github.com/havelessbemore/cvm-lib/blob/d0e42e507693783738e61204cf1d8fd9eaa485bc/src/capacity.ts#L67)

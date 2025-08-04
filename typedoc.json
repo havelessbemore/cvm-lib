@@ -1,7 +1,12 @@
 {
-  "$schema": "https://typedoc.org/schema.json",
-  "entryPoints": ["src/index.ts"],
-  "excludeInternal": true,
-  "out": "docs",
-  "plugin": ["typedoc-plugin-markdown"]
+    "$schema": "https://typedoc.org/schema.json",
+    "entryPoints": ["src/index.ts"],
+    "externalSymbolLinkMappings": {
+        "typescript": {
+            "Iterator": "#",
+            "RangeError": "#"
+        }
+    },
+    "out": "./docs",
+    "plugin": ["typedoc-plugin-markdown"]
 }

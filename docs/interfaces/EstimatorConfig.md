@@ -1,4 +1,4 @@
-[**cvm-lib**](../README.md) • **Docs**
+[**cvm-lib**](../README.md)
 
 ***
 
@@ -6,11 +6,15 @@
 
 # Interface: EstimatorConfig\<T\>
 
+Defined in: [types/estimatorConfig.ts:11](https://github.com/havelessbemore/cvm-lib/blob/9b271107ec7b8bf4b4e48d441a8edb9ea15658be/src/types/estimatorConfig.ts#L11)
+
 Configuration options for the [Estimator](../classes/Estimator.md) class.
 
 ## Type Parameters
 
-• **T** = `any`
+### T
+
+`T` = `any`
 
 ## Properties
 
@@ -18,21 +22,21 @@ Configuration options for the [Estimator](../classes/Estimator.md) class.
 
 > **capacity**: `number`
 
+Defined in: [types/estimatorConfig.ts:19](https://github.com/havelessbemore/cvm-lib/blob/9b271107ec7b8bf4b4e48d441a8edb9ea15658be/src/types/estimatorConfig.ts#L19)
+
 The maximum number of samples in memory. Must be a positive integer.
 
 This should be calculated via [calculateCapacity](../functions/calculateCapacity.md) but
 can also be set arbitrarily. In general, larger
 values give more accurate estimates.
 
-#### Defined in
-
-[types/estimatorConfig.ts:19](https://github.com/havelessbemore/cvm-lib/blob/d0e42e507693783738e61204cf1d8fd9eaa485bc/src/types/estimatorConfig.ts#L19)
-
 ***
 
 ### randomFn()?
 
 > `optional` **randomFn**: () => `number`
+
+Defined in: [types/estimatorConfig.ts:27](https://github.com/havelessbemore/cvm-lib/blob/9b271107ec7b8bf4b4e48d441a8edb9ea15658be/src/types/estimatorConfig.ts#L27)
 
 (Optional) The random number generator function.
 
@@ -43,28 +47,22 @@ Otherwise, this may cause unintended behavior such as invalid estimates.
 
 `number`
 
-#### Defined in
-
-[types/estimatorConfig.ts:27](https://github.com/havelessbemore/cvm-lib/blob/d0e42e507693783738e61204cf1d8fd9eaa485bc/src/types/estimatorConfig.ts#L27)
-
 ***
 
 ### sampleRate?
 
 > `optional` **sampleRate**: `number`
 
+Defined in: [types/estimatorConfig.ts:37](https://github.com/havelessbemore/cvm-lib/blob/9b271107ec7b8bf4b4e48d441a8edb9ea15658be/src/types/estimatorConfig.ts#L37)
+
 (Optional) The sampling rate for managing samples. Must be between 0 and 1.
 
 #### Remarks
 
 Custom values may negatively affect accuracy. In general, the
-further from `0.5`, the more it's affected. If [capacity](EstimatorConfig.md#capacity) was
+further from `0.5`, the more it's affected. If [capacity](#capacity) was
 calculated via [calculateCapacity](../functions/calculateCapacity.md), expected accuracy / confidence
 may be invalidated.
-
-#### Defined in
-
-[types/estimatorConfig.ts:37](https://github.com/havelessbemore/cvm-lib/blob/d0e42e507693783738e61204cf1d8fd9eaa485bc/src/types/estimatorConfig.ts#L37)
 
 ***
 
@@ -72,8 +70,6 @@ may be invalidated.
 
 > `optional` **storage**: [`SampleSet`](SampleSet.md)\<`T`\>
 
+Defined in: [types/estimatorConfig.ts:42](https://github.com/havelessbemore/cvm-lib/blob/9b271107ec7b8bf4b4e48d441a8edb9ea15658be/src/types/estimatorConfig.ts#L42)
+
 (Optional) A custom [SampleSet](SampleSet.md) object for storing samples.
-
-#### Defined in
-
-[types/estimatorConfig.ts:42](https://github.com/havelessbemore/cvm-lib/blob/d0e42e507693783738e61204cf1d8fd9eaa485bc/src/types/estimatorConfig.ts#L42)
