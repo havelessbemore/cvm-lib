@@ -4,7 +4,6 @@ Estimate the number of distinct values in a set using the simple and space-effic
 
 [![Version](https://img.shields.io/npm/v/cvm-lib.svg)](https://www.npmjs.com/package/cvm-lib)
 [![JSR](https://jsr.io/badges/@rojas/cvm)](https://jsr.io/@rojas/cvm)
-[![Maintenance](https://img.shields.io/maintenance/yes/2024.svg)](https://github.com/havelessbemore/cvm-lib/graphs/commit-activity)
 [![License](https://img.shields.io/github/license/havelessbemore/cvm-lib.svg)](https://github.com/havelessbemore/cvm-lib/blob/master/LICENSE)
 [![codecov](https://codecov.io/gh/havelessbemore/cvm-lib/graph/badge.svg?token=F362G7C9U0)](https://codecov.io/gh/havelessbemore/cvm-lib)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/cvm-lib)
